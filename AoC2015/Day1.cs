@@ -4,7 +4,7 @@ namespace AoC_2015
 {
     static class Day1
     {
-        public static void Solution1and2()
+        public static void Solution()
         {
             int floor = 0;
             bool basement1stTime = false;

@@ -9,7 +9,7 @@ namespace AoC_2016
             WriteLine("Solutions to Advent of Code 2016!");
 
             WriteLine('\n' + "Day 1:");
-            Day1.Solution1();
+            Day1.Solution();
 
             ReadLine();
         }
