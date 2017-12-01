@@ -1,4 +1,4 @@
-# Advent of Code 2015
+# Advent of Code 2017
 
 ## Day 1
 | Language used | Solution 1 | Solution 2 |
