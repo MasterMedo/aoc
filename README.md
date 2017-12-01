@@ -8,4 +8,4 @@ C#, Haskell, c++, javascript
 C#, Java, python
 
 ### AoC 2017
-C#
+C#, c++
