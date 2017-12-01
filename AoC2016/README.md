@@ -3,7 +3,7 @@
 ## Day 1
 | Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
-| test | test | test |
+| C# | 146 | 131 |
 ## Day 2
 | Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
