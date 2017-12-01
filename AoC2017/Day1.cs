@@ -17,7 +17,7 @@ namespace AoC_2017
                     sum += int.Parse(input[i].ToString());
                 }
             }
-            WriteLine("The sum of all digits is: " + sum);
+            WriteLine("The sum of all equal adjacent digits in a circular list is: " + sum);
 
             // Task 2
             sum = 0;
@@ -29,7 +29,7 @@ namespace AoC_2017
                     sum += int.Parse(input[i].ToString());
                 }
             }
-            WriteLine("The sum of all digits is: " + sum);
+            WriteLine("The sum of all equal digits half a, circular, list away is: " + sum);
         }
     }
 }
