@@ -1,0 +1,21 @@
+# Current directoy
+.vs
+AdventOfCode.sln
+
+# AoC2015
+/AoC2015/*
+!/AoC2015/*.cs
+!/AoC2015/*.cpp
+!/AoC2015/*.md
+
+# AoC2016
+/AoC2016/*
+!/AoC2016/*.cs
+!/AoC2016/*.cpp
+!/AoC2016/*.md
+
+# AoC2017
+/AoC2017/*
+!/AoC2017/*.cs
+!/AoC2017/*.cpp
+!/AoC2017/*.md
