@@ -3,7 +3,7 @@
 ## Day 1
 | Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
-| C# | test | test |
+| test | test | test |
 ## Day 2
 | Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
@@ -12,13 +12,16 @@
 | Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
 | test | test | test |
-## Day 4| Language used | Solution 1 | Solution 2 |
+## Day 4
+| Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
 | test | test | test |
-## Day 5| Language used | Solution 1 | Solution 2 |
+## Day 5
+| Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
 | test | test | test |
-## Day 6| Language used | Solution 1 | Solution 2 |
+## Day 6
+| Language used | Solution 1 | Solution 2 |
 |:-:|:-:|:-:|
 | test | test | test |
 ## Day 7
