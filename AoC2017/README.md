@@ -3,4 +3,4 @@
 | Day | Language used | Solution 1 | Solution 2 |
 |:-: |:-:|:-:|:-:|
 | 1 | C#, c++ | 1144 | 1194 |
-| 2 | | | |
+| 2 | Python | 42378 | 246 |
