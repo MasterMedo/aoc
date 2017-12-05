@@ -6,3 +6,4 @@
 | 2 | Python | Day2_input.txt | 42378 | 246 |
 | 3 | Python, C# | 325489 | 552 | 330785 |
 | 4 | C# | Day4_input.txt | 477 | 167 |
+| 5 | C# | Day5_input.txt | 387096 | 280440648 |
