@@ -1,5 +1,7 @@
 *
 !AoC*/
+!AoC*/src/
+!AoC*/inputs/
 !*.cpp
 !*.cs
 !*.hs
