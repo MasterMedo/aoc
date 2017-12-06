@@ -5,5 +5,7 @@
 !*.hs
 !*.js
 !*.md
+!*.pl
 !*.py
 !*.txt
+test*
