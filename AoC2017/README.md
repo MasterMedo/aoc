@@ -8,3 +8,5 @@
 | 4 | C# | Day4_input.txt | 477 | 167 |
 | 5 | C# | Day5_input.txt | 387096 | 280440648 |
 | 6 | python | Day6_input.txt | 5042 | 1086 |
+| 7 | python | Day7_input.txt | vmpywg | 1674 |
+| 8 | C# | Day8_input.txt | 6611 | 6619 |

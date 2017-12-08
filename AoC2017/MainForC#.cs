@@ -20,6 +20,9 @@ namespace AoC_2017
             WriteLine('\n' + "Day 5:");
             Day5.Solution();
 
+            WriteLine('\n' + "Day 8:");
+            Day8.Solution();
+
             ReadLine();
         }
     }
