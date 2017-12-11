@@ -9,7 +9,7 @@ namespace AoC_2017
         public static void Solution()
         {
             string line;
-            System.IO.StreamReader input = new System.IO.StreamReader(@"C:\Users\MasterMedo\Source\Repos\AdventOfCode\AoC2017\inputs\Day4_input.txt");
+            System.IO.StreamReader input = new System.IO.StreamReader(@"C:\Users\MasterMedo\Source\Repos\AdventOfCode\AoC2017\inputs\p04.txt");
             int counter1 = 0;
             int counter2 = 0;
             while ((line = input.ReadLine()) != null)

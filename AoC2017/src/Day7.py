@@ -3,7 +3,7 @@ def getWeight(key):
     return wAndn[key][0]
   return sum([getWeight(x) for x in wAndn[key][2:]]) + wAndn[key][0]
 
-with open("../inputs/Day7_input.txt") as f:
+with open("../inputs/p07.txt") as f:
   rows = [line.replace(",", "").split() for line in f.read().strip().splitlines()]
 
 # Part 1

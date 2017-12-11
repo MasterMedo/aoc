@@ -17,7 +17,7 @@ def garbage():
       garb -= 1
     i += 1
 
-with open("../inputs/Day9_input.txt") as f:
+with open("../inputs/p09.txt") as f:
   data = list(f.read().replace('\n',''))
 
 i = garb = 0

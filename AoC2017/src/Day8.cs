@@ -13,7 +13,7 @@ namespace AoC_2017
             int max = 0;
             string line;
             Dictionary<string, int> dict = new Dictionary<string, int>();
-            System.IO.StreamReader input = new System.IO.StreamReader(@"C:\Users\MasterMedo\Source\Repos\AdventOfCode\AoC2017\inputs\Day8_input.txt");
+            System.IO.StreamReader input = new System.IO.StreamReader(@"C:\Users\MasterMedo\Source\Repos\AdventOfCode\AoC2017\inputs\p08.txt");
             while ((line = input.ReadLine()) != null)
             {
                 bool flag = false;
