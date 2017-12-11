@@ -1,14 +1,14 @@
 # Advent of Code 2017
 
-| Day | Language used | Input | Solution 1 | Solution 2 |
-| :-: | :-----------: | :---: | :--------: | :--------: |
-| 1 | C#, c++ | Day1_input.txt | 1144 | 1194 |
-| 2 | python | Day2_input.txt | 42378 | 246 |
-| 3 | python, C# | 325489 | 552 | 330785 |
-| 4 | C# | Day4_input.txt | 477 | 167 |
-| 5 | C# | Day5_input.txt | 387096 | 280440648 |
-| 6 | python | Day6_input.txt | 5042 | 1086 |
-| 7 | python | Day7_input.txt | vmpywg | 1674 |
-| 8 | C# | Day8_input.txt | 6611 | 6619 |
-| 9 | python | Day9_input.txt | 23588 | 10045 |
-| 10 | python | Day10_input.txt | 38415 | 9de8846431eef262be78f590e39a4848 |
+| Day | Input | Language used | Solution 1 | Solution 2 |
+| :-: | :---: | :-----------: | :--------: | :--------: |
+| 1 |  p01.txt | C#, c++ | 1144 | 1194 |
+| 2 |  p02.txt | python | 42378 | 246 |
+| 3 |  p03.txt | python, C# | 552 | 330785 |
+| 4 |  p04.txt | C# | 477 | 167 |
+| 5 |  p05.txt | C# | 387096 | 280440648 |
+| 6 |  p06.txt | python | 5042 | 1086 |
+| 7 |  p07.txt | python | vmpywg | 1674 |
+| 8 |  p08.txt | C# | 6611 | 6619 |
+| 9 |  p09.txt | python | 23588 | 10045 |
+| 10|  p10.txt | python | 38415 | 9de8846431eef262be78f590e39a4848 |
