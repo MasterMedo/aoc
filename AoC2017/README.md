@@ -11,3 +11,4 @@
 | 7 | python | Day7_input.txt | vmpywg | 1674 |
 | 8 | C# | Day8_input.txt | 6611 | 6619 |
 | 9 | python | Day9_input.txt | 23588 | 10045 |
+| 10 | python | Day10_input.txt | 38415 | 9de8846431eef262be78f590e39a4848 |
