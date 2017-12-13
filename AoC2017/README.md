@@ -14,3 +14,4 @@
 | 10| p10.txt | python | 38415 | 9de8846431eef262be78f590e39a4848 |
 | 11| p11.txt | python | 698 | 1435 |
 | 12| p12.txt | python | 283 | 195 |
+| 13| p13.txt | python | 2384 | 3921270 |
