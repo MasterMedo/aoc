@@ -1,4 +1,5 @@
-def Solution(data):
+# Day 10
+def bits(data):
   LEN = 256
   L = [i for i in range(LEN)]
   i = skip = 0
@@ -27,14 +28,34 @@ def Solution(data):
     s += '0'
   return s + bin(int(hash, 16))[2:]
 
+# Day 14
+def group(i,j,num):
+  global grid
+  grid[i][j][1] = num
+  if i != 0: 
+    if grid[i-1][j][0] == 1 and grid[i-1][j][1] == 0: group(i-1,j,num)
+  if i != 127: 
+    if grid[i+1][j][0] == 1 and grid[i+1][j][1] == 0: group(i+1,j,num)
+  if j != 0: 
+    if grid[i][j-1][0] == 1 and grid[i][j-1][1] == 0: group(i,j-1,num)
+  if j != 127: 
+    if grid[i][j+1][0] == 1 and grid[i][j+1][1] == 0: group(i,j+1,num)
+
 with open("../inputs/p14.txt") as f:
   data = f.read()
 
-cnt = 0
+num = cnt = 0
+grid = []
 for row in range(128):
-  tmp = data + '-' + str(row)
-  data2 = [ord(i) for i in list(tmp)] + [17, 31, 73, 47, 23]
-  binRow = Solution(data2)
-  for i in binRow:
+  binRow = bits([ord(i) for i in list(data + '-' + str(row))] + [17, 31, 73, 47, 23])
+  for i in binRow: 
     if i == '1': cnt += 1
+  grid.append([[int(x),0] for x in list(binRow)])
 print cnt
+for i in xrange(128):
+  for j in xrange(128):
+    if grid[i][j][0] == 1 and grid[i][j][1] == 0:
+      num += 1
+      group(i,j,num)
+
+print num
