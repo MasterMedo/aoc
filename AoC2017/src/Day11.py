@@ -9,7 +9,7 @@ for card in data:
   elif card == 'sw': x -= 1; z += 1
   elif card == 'nw': x -= 1; y += 1
   elif card == 'se': x += 1; y -= 1 
-  dist = (abs(x) + abs(y) + abs(z)) / 2:
+  dist = (abs(x) + abs(y) + abs(z)) / 2
   sol = dist if sol < dist else sol
 
 print (abs(x) + abs(y) + abs(z)) / 2
