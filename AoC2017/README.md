@@ -16,3 +16,5 @@
 | 12| p12.txt | python | 283 | 195 |
 | 13| p13.txt | python | 2384 | 3921270 |
 | 14| p14.txt | python | 8304 | 1018 |
+| 15| p15.txt | python | 638 | 343 |
+| 16| p16.txt | python | | |
