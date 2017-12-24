@@ -19,3 +19,4 @@
 | 15| p15.txt | python | 638 | 343 |
 | 16| p16.txt | python | bijankplfgmeodhc | bpjahknliomefdgc |
 | 17| p17.txt | python | 640 | 47949463 |
+| 18| p18.txt | python | 1187 | |
