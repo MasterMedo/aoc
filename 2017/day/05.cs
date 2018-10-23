@@ -9,7 +9,7 @@ namespace AoC_2017
         {
             string line;
             List<int> list = new List<int>();
-            System.IO.StreamReader input = new System.IO.StreamReader(@"C:\Users\MasterMedo\Source\Repos\AdventOfCode\AoC2017\inputs\p05.txt");
+            System.IO.StreamReader input = new System.IO.StreamReader(@".\input\05.txt");
             while ((line = input.ReadLine()) != null)
             {
                 list.Add(int.Parse(line));

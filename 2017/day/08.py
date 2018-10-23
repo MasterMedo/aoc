@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-with open("../inputs/p08.txt") as f:
+with open("../input/08.txt") as f:
   data = f.read().strip()
 
 m = 0

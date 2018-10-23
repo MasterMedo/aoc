@@ -25,7 +25,7 @@ def Solution(data, part1):
     hash += format(tmp,'02x')
   print hash
 
-with open("../inputs/p10.txt") as f:
+with open("../input/10.txt") as f:
   fp = f.read()
   data1 = [int(i) for i in fp.replace(',',' ').split()]
   data2 = [ord(i) for i in list(fp)] + [17, 31, 73, 47, 23]

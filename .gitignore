@@ -1,7 +1,7 @@
 *
-!AoC*/
-!AoC*/src/
-!AoC*/inputs/
+!20*/
+!20*/day/
+!20*/input/
 !*.cpp
 !*.cs
 !*.hs

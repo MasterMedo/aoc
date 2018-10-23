@@ -23,7 +23,7 @@ def solution(block):
   print i
   return block
 
-with open("../inputs/p06.txt") as f:
+with open("../input/06.txt") as f:
   rows = [digits(line) for line in f.read().strip().splitlines()]
 
 solution(solution(rows[0]))

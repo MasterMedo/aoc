@@ -1,4 +1,4 @@
-with open ("../inputs/p16.txt") as f:
+with open ("../input/16.txt") as f:
     data = f.read().split(',')
 
 def solution(cap):

@@ -1,4 +1,4 @@
-with open("../inputs/p18.txt") as f:
+with open("../input/18.txt") as f:
     data = [x.strip().split() for x in f.readlines()]
 
 def num(a):

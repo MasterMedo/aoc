@@ -1,4 +1,4 @@
-with open("../inputs/p12.txt") as f:
+with open("../input/12.txt") as f:
   pipes = [line.replace('<->', '').replace(',','').split() for line in f.read().strip().splitlines()]
 
 groups = []

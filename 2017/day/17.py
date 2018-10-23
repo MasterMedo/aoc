@@ -1,4 +1,4 @@
-with open("../inputs/p17.txt") as f:
+with open("../input/17.txt") as f:
     input = int(f.read())
 
 # Part 1

@@ -1,7 +1,7 @@
 def digits(string):
     return [int(n) for n in string.split()]
 
-with open("../inputs/p02.txt") as f:
+with open("../input/02.txt") as f:
   rows = [digits(line) for line in f.read().strip().splitlines()]
 
 print(sum(max(row)-min(row) for row in rows))

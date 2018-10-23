@@ -1,4 +1,4 @@
-with open("../inputs/p11.txt") as f:
+with open("../input/11.txt") as f:
   data = [i for i in f.read().replace(',',' ').split()]
 
 x = y = z = sol = 0

@@ -1,7 +1,7 @@
 def severity(x,y):
   return x*y if x%(y*2-2) == 0 else 0
 
-with open("../inputs/p13.txt") as f:
+with open("../input/13.txt") as f:
   data = [[int(x), int(y)] for x,y in [line.strip().split(': ') for line in f.readlines()]]
 
 print sum(severity(x,y) for x,y in data)

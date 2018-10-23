@@ -41,7 +41,7 @@ def group(i,j,num):
   if j != 127: 
     if grid[i][j+1][0] == 1 and grid[i][j+1][1] == 0: group(i,j+1,num)
 
-with open("../inputs/p14.txt") as f:
+with open("../input/14.txt") as f:
   data = f.read()
 
 num = cnt = 0
