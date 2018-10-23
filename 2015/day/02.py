@@ -8,7 +8,7 @@ def sort(row):
   row.sort()
   return row
 
-with open("../inputs/p02.txt") as f:
+with open("../input/02.txt") as f:
   rows = [digits(line) for line in f.read().strip().splitlines()]
 
 print(sum(2*side for row in rows for side in sides(row)) + sum(min(sides(row)) for row in rows))
