@@ -9,7 +9,8 @@ def get(key):
         return m[key]
     except Exception:
         l = data[key]
-        return l[0](l[-2], l[-1]) 
+        m[key] = l[0](l[-2], l[-1]) 
+        return m[key]
 
 def organize(l):
     global f
@@ -31,4 +32,8 @@ f = {
 with open('../input/07.txt') as fp:
     data = {l.split()[-1]: organize(l) for l in fp.read().strip().splitlines()}
 
+firstPart=get('a')
+print(c_ushort(firstPart))
+m={}
+data['b']=[lambda a, b: get(a), firstPart, None]
 print(c_ushort(get('a')))
