@@ -1,13 +1,9 @@
 *
 !20*/
+!20*/img/
 !20*/day/
 !20*/input/
-!*.cpp
-!*.cs
-!*.hs
-!*.js
 !*.md
-!*.pl
 !*.py
 !*.txt
-test*
+!*.png
