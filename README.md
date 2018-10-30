@@ -1,8 +1,8 @@
 # advent of code
 
-### mostly python
+### python only branch
 
-### possible occurances of:
-bash, c, c++, C#, Go, haskell, J, java, javascript, K, perl, python, R, ruby, rust
+- in each repository you can find the table of currently finished tasks
 
-In each repository you can find the table of currently finished tasks.
+note that for now some tasks were solved in other programming languages
+you can find them in the non-python branch
