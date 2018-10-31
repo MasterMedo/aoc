@@ -1,39 +1,28 @@
-from ctypes import c_ushort
+def org(l):
+    l[0] = l[0].split()
+    if len(l[0]) == 1:
+        return l[1], [lambda a, b: get(a), l[0][0], None]
+    return l[1], [f[l[0][-2]], l[0][0], l[0][-1]]
 
 def get(key):
-    global data, m
-    if key in m:
-        return m[key]
-    try:
+    if key not in m and (isinstance(key, int) or key.isdigit()):
         m[key] = int(key)
-        return m[key]
-    except Exception:
-        l = data[key]
-        m[key] = l[0](l[-2], l[-1]) 
-        return m[key]
+    elif key not in m:
+        m[key] = data[key][0](data[key][1], data[key][-1]) 
+    return m[key]
 
-def organize(l):
-    global f
-    l = l.split()
-    for i in f:
-        if i in l:
-            return [f[i], l[0], l[-3]]
-    return [lambda a, b: get(a), l[0], None]
-
-m = {}
 f = { 
-        'NOT'   : lambda a, b: ~get(b),\
-        'AND'   : lambda a, b: get(a)&get(b),\
-        'OR'    : lambda a, b: get(a)|get(b),\
-        'RSHIFT': lambda a, b: get(a)>>get(b),\
-        'LSHIFT': lambda a, b: get(a)<<get(b),\
+        'NOT'   : lambda a, b: ~ get(b),
+        'AND'   : lambda a, b: get(a) & get(b),
+        'OR'    : lambda a, b: get(a) | get(b),
+        'RSHIFT': lambda a, b: get(a) >> get(b),
+        'LSHIFT': lambda a, b: get(a) << get(b),
     }
 
 with open('../input/07.txt') as fp:
-    data = {l.split()[-1]: organize(l) for l in fp.read().strip().splitlines()}
+    data = dict([org(i.split(' -> ')) for i in fp.read().strip().splitlines()])
 
-firstPart=get('a')
-print(c_ushort(firstPart))
-m={}
-data['b']=[lambda a, b: get(a), firstPart, None]
-print(c_ushort(get('a')))
+m = {}
+firstPart, m = get('a'), {}
+data['b'] = [lambda a, b: get(a), firstPart, None]
+print firstPart, get('a')
