@@ -1,38 +1,18 @@
-x = [[0 for i in range(1000)] for i in range(1000)]
+import numpy as np
 
-def toggle(a, b):
-    global x
-    for i in range(a[0], b[0]):
-        for j in range(a[1], b[1]):
-            #if x[i][j] == 1:
-            #   x[i][j] = 0
-            #else:
-            #   x[i][j] = 1
-            x[i][j] += 2
-    return
+with open('../input/06.txt') as fp:
+    data = [i.replace("turn ", "turn").split() for i in fp.read().strip().splitlines()]
 
-def turn(n, a, b):
-    global x
-    for i in range(a[0], b[0]):
-        for j in range(a[1], b[1]):
-            #x[i][j] = n
-            if x[i][j] >= 1 or n != -1:
-                x[i][j] += n
-    return
+f = {
+        "turnon": lambda x, y: x * 1 + y,   # x * 1
+        "turnoff": lambda x, y: x * -1 + y, # x * -1
+        "toggle": lambda x, y: x * 2 + y    # 1 - y
+    }
 
-with open("../input/06.txt") as f:
-    input = f.read().strip().splitlines()
+grid = np.zeros((1000, 1000))
+for line in data:
+    x1, y1, x2, y2 = map(int, ''.join(line[1] + ',' + line[-1]).split(','))
+    grid[x1: x2 + 1, y1: y2 + 1] = f[line[0]](np.ones((x2 - x1+ 1, y2 - y1 + 1)), grid[x1: x2 + 1, y1: y2 + 1])
+    grid[grid < 0] = 0
 
-for i in input:
-    l = i.split() 
-    a, b = l[-3].split(','), l[-1].split(',')
-    a[0], a[1], b[0], b[1] = int(a[0]), int(a[1]), int(b[0])+1, int(b[1])+1
-    if 'on' in i:
-        turn(1, a, b) 
-    elif 'off' in i:
-        #turn(0, a, b)
-        turn(-1, a, b)
-    else:
-        toggle(a, b)
-
-print(sum([sum(i) for i in x]))
+print np.sum(grid)
