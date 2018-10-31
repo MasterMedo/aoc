@@ -1,22 +1,9 @@
-def org(line):
-    l = line.split()
-    return [((l[0], l[2]), int(l[4])), ((l[2], l[0]), int(l[4]))]
-
 def solve(c, x, n):
-    if len(c) == 0:
-        return n
-    #s = float('inf')
-    s = 0
-    for y in c:
-        #s = min(solve(c.difference({y}), y, n + data[x, y]), s)
-        s = max(solve(c.difference({y}), y, n + data[x, y]), s)
-    return s
+    return n if len(c) == 0 else max([solve(c.difference({y}), y, n + data.get((x, y), data.get((y, x), 0))) for y in c])
+    return n if len(c) == 0 else min([solve(c.difference({y}), y, n + data.get((x, y), data.get((y, x), 0))) for y in c])
 
 with open('../input/09.txt') as fp:
-    data = dict([j for i in fp.read().strip().splitlines() for j in org(i)])
+    data = dict([((i.split()[0], i.split()[2]), int(i.split()[4])) for i in fp.read().strip().splitlines()])
 
 cities = {city for pair in data for city in pair}
-for i in cities:
-    data['any', i] = 0
-
-print solve(cities, 'any', 0)
+print solve(cities, 'anything', 0)
