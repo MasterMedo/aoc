@@ -1,0 +1,5 @@
+53 cost, 1 turn(s), 4 damage
+73 cost, 1 turn(s), 2 damage, 2 heal
+113 cost, 6 turn(s), 7 armor
+173 cost, 6 turn(s), 3 damage
+229 cost, 5 turn(s), 101 mana
