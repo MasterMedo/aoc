@@ -1,59 +1,22 @@
-def getWeight(key):
-  if len(wAndn[key]) == 2:
-    return wAndn[key][0]
-  return sum([getWeight(x) for x in wAndn[key][2:]]) + wAndn[key][0]
-
 with open("../input/07.txt") as f:
-  rows = [line.replace(",", "").split() for line in f.read().strip().splitlines()]
+  data = [i.replace(',', '').split() for i in f.readlines()]
 
-# Part 1
-nodes = []
-potentials = []
-for row in rows:
-  potentials.append(row[0])
-  i = len(row) - 1
-  while row[i] != "->" and len(row) > 3:
-    if row[i] not in nodes:
-      nodes.append(row[i])
-    i -= 1
+part1 = set(i[0] for i in data).difference(set(j for i in data for j in i[2:])).pop()
+print part1
 
-for p in potentials:
-  if p not in nodes:
-    print p, "is the base node"
-
-# Part 2
-wAndn = {}
-for row in rows:
-  L = []
-  L.append(int(row[1].replace(")","").replace("(","")))
-  L.append(0)
-  if len(row) > 3:
-    L += [x for x in row[3:]]
-  wAndn[row[0]] = L
-
-for key in wAndn:
-  wAndn[key][1] = getWeight(key)
-
-faulty = []
-potentials = []
-for key in wAndn:
-  if len(wAndn[key]) > 2:
-    for i in wAndn[key][2:]:
-      for j in wAndn[key][2:]:
-        if wAndn[i][1] != wAndn[j][1]:
-          for k in wAndn[key][2:]:
-            if wAndn[k][1] != wAndn[i][1] and k != j:
-              if i not in potentials:
-                potentials.append(i)
-                faulty.append(i)
-for f in faulty:
-  for i in wAndn[f][2:]:
-    if i in faulty and f in potentials:
-      potentials.remove(f)
-node = potentials[0]
-for f in faulty:
-  if node in wAndn[f][2:]:
-    for i in wAndn[f][2:]:
-      if i != node:
-        print "Weight of node", node, "should be", wAndn[node][0] + wAndn[i][1] - wAndn[node][1]
+weight = {}
+for i in range(len(data)):
+    data[i][1] = int(data[i][1][1:-1])
+    weight[data[i][0]] = data[i][1]
+    
+m = {part1: -float('inf')}
+while m[part1] == -float('inf'):
+    i = data.pop()
+    above = [m.get(j, -float('inf')) for j in i[3:]]
+    m[i[0]] = i[1] if len(i) == 2 else sum(above) + i[1]
+    if m[i[0]] == -float('inf'):
+        data.insert(0, i)
+    elif len(above) > 0 and above.count(above[0]) != len(above):
+        node = [x for x in i[3:] if above.count(m[x]) == 1][0]
+        print weight[node] + sum(set(above)) - 2 * m[node]
         break
