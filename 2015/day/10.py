@@ -1,8 +1,7 @@
-with open('../input/10.txt') as fp:
-    data = [int(i) for i in list(fp.read().strip())]
+with open('../input/10.txt') as f:
+    data = map(int, list(f.read().strip()))
 
-# for i in range(40):
-for i in range(50):
+for i in xrange(50): # 40
     tmp, cur, cnt = [], data[0], 0
     for i in data:
         if i != cur:

@@ -1,5 +1,5 @@
-with open("../input/09.txt") as f:
-  data = list(f.read().replace('\n',''))
+with open("../input/9.txt") as f:
+  data = list(f.read().replace('\n', ''))
 
 i = lvl = depth = garbage = 0
 ExFlag = GaFlag = False

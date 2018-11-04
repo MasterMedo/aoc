@@ -1,15 +1,15 @@
-f = {\
+f = {
         "^": lambda xy: (xy[0] - 1, xy[1]),
         "v": lambda xy: (xy[0] + 1, xy[1]),
         "<": lambda xy: (xy[0], xy[1] - 1),
         ">": lambda xy: (xy[0], xy[1] + 1)
     }
 
-with open('../input/03.txt') as fp:
+with open('../input/3.txt') as fp:
     data = fp.read().strip()
 
 grid, xy = {(0, 0): 1}, [[0, 0], [0, 0]]
-for i in range(len(data)):
+for i in xrange(len(data)):
     # mod = 0
     mod = i % 2
     xy[mod] = f[data[i]](xy[mod])

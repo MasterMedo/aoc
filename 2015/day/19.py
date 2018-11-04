@@ -13,9 +13,9 @@ with open('../input/19.txt') as fp:
 
 print(len(set([j for i in replacements for j in swap(molecule, replacements[i], i)])))
 
-for i in range(10): # increase if needed
+for i in xrange(10): # increase if needed
     cnt, mole = 0, molecule
-    for z in range(10000): 
+    for z in xrange(10000): 
         i = random.choice(list(replacements))
         find = mole.find(i)
         if find != -1:

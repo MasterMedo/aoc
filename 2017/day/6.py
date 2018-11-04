@@ -6,12 +6,12 @@ def solve(block):
         top = max(block)
         i = block.index(top)
         block[i] = 0
-        for j in range(top):
+        for j in xrange(top):
             block[(i + j + 1) % len(block)] += 1
     print count
     return block
 
-with open("../input/06.txt") as f:
+with open("../input/6.txt") as f:
     block = map(int, f.read().strip().split())
 
 solve(solve(block))

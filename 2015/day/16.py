@@ -1,12 +1,10 @@
 def org(i):
-    i = i.replace(':','').replace(',','').split()
+    i = i.replace(':', '').replace(',', '').split()
     return int(i[1]), {x: int(y) for x,y in zip(i[2::2], i[3::2])}
 
-with open('../input/16.txt') as fp:
-    data = dict([org(i) for i in fp.read().strip().splitlines()])
-
-with open('../input/16-ticker-tape.txt') as f:
-    tt = {y: int(z) for x in f.read().strip().splitlines() for y, z in [x.replace(':', '').split()]}
+with open('../input/16.txt') as f, open('../input/16-ticker-tape.txt') as ftt:
+    data = dict(org(i[:-1]) for i in f.readlines())
+    tt = {y: int(z) for x in ftt.readlines() for y, z in [x.replace(':', '').split()]}
 
 for i in data:
     for j in tt:

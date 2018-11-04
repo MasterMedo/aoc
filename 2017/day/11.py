@@ -1,5 +1,5 @@
 with open("../input/11.txt") as f:
-  data = [i for i in f.read().replace(',',' ').split()]
+  data = f.read().split(',')
 
 x = y = z = sol = 0
 for card in data:

@@ -1,5 +1,5 @@
-with open('../input/05.txt') as fp:
-    data = map(int, fp.readlines())
+with open('../input/5.txt') as f:
+    data = map(int, f.readlines())
 
 pc = steps = 0
 while pc < len(data):

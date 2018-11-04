@@ -1,5 +1,5 @@
-with open('../input/04.txt') as fp:
-    data = [i.split() for i in fp.readlines()]
+with open('../input/4.txt') as f:
+    data = [i.split() for i in f.readlines()]
 
 print sum(1 for i in data if len(i) == len(set(i)))
 print sum(1 for i in data if len(i) == len(set(i))

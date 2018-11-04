@@ -8,7 +8,7 @@ def score(l):
 
 with open('../input/21.txt') as fp, open('../input/21-shop.txt') as fs:
     shop = [[map(int, j.split()[1:]) for j in i.splitlines()[1:]] for i in fs.read().strip().split("\n\n")]
-    bHp, bAtt, bDef = [int(i.split(': ')[1]) for i in fp.read().strip().splitlines()]
+    bHp, bAtt, bDef = [int(i.split(': ')[1]) for i in fp.readlines()]
 
 shop[1].append((0, 0, 0))
 shop[2].extend([(0, 0, 0), (0, 0, 0)])

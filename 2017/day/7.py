@@ -1,11 +1,11 @@
-with open("../input/07.txt") as f:
+with open("../input/7.txt") as f:
   data = [i.replace(',', '').split() for i in f.readlines()]
 
 part1 = set(i[0] for i in data).difference(set(j for i in data for j in i[2:])).pop()
 print part1
 
 weight = {}
-for i in range(len(data)):
+for i in xrange(len(data)):
     data[i][1] = int(data[i][1][1:-1])
     weight[data[i][0]] = data[i][1]
     

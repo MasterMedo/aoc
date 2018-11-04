@@ -20,9 +20,11 @@ f = {
     }
 
 with open('../input/7.txt') as fp:
-    data = dict([org(i.split(' -> ')) for i in fp.read().strip().splitlines()])
+    data = dict([org(i[:-1].split(' -> ')) for i in fp.readlines()])
 
 m = {}
 firstPart, m = get('a'), {}
 data['b'] = [lambda a, b: get(a), firstPart, None]
-print firstPart, get('a')
+
+print firstPart
+print get('a')

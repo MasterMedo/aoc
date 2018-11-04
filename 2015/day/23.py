@@ -3,12 +3,12 @@ f = {
         'tpl': lambda r, pc, x: (r * 3, pc + 1),
         'inc': lambda r, pc, x: (r + 1, pc + 1),
         'jmp': lambda r, pc, x: (r, pc + int(x)),
-        'jie': lambda r, pc, x: (r, pc + int(x) if r %2 == 0 else pc + 1),
+        'jie': lambda r, pc, x: (r, pc + int(x) if r % 2 == 0 else pc + 1),
         'jio': lambda r, pc, x: (r, pc + int(x) if r == 1 else pc + 1)
     }
 
 with open('../input/23.txt') as fp:
-    instructions = [i.split() for i in fp.read().strip().replace('+','').replace(',','').splitlines()]
+    instructions = [i.split() for i in fp.read().strip().replace('+', '').replace(',', '').splitlines()]
 
 # pc, r = 0, {'a': 0, 'b': 0}
 pc, r = 0, {'a': 1, 'b': 0}

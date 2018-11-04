@@ -7,8 +7,8 @@ def nex(x, y):
     if x <= -y and x < y:  return x, y - 1
     if x <= -y and x >= y: return x + 1, y
 
-with open('../input/03.txt') as fp:
-    data = int(fp.read().strip())
+with open('../input/3.txt') as f:
+    data = int(f.read().strip())
 
 a, b, c = 1, 0, 3
 while a < data:

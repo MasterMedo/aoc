@@ -7,8 +7,8 @@ def num(l, m, d):
         s += num(l[i + 1:], m - l[i], d + 1)
     return s
 
-with open('../input/17.txt') as fp:
-    data = [int(i) for i in fp.read().strip().splitlines()]
+with open('../input/17.txt') as f:
+    data = [int(i) for i in f.readlines()]
 
 k = []
 print num(data, 150, 1)

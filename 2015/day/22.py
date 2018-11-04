@@ -1,6 +1,6 @@
 import random
 
-def magic_missle(spell):
+def magic_missile(spell):
     global bHp
     bHp -= 4
 
@@ -41,11 +41,11 @@ def cast():
     tmpCast = {}
 
 spells = [
-        {'name': 'magic_missle', 'cost': 53,  'turns': 1, 'spell': lambda spell: magic_missle(spell)},
-        {'name': 'drain',        'cost': 73,  'turns': 1, 'spell': lambda spell: drain(spell)},
-        {'name': 'shield',       'cost': 113, 'turns': 6, 'spell': lambda spell: shield(spell)},
-        {'name': 'poison',       'cost': 173, 'turns': 6, 'spell': lambda spell: poison(spell)},
-        {'name': 'recharge',     'cost': 229, 'turns': 5, 'spell': lambda spell: recharge(spell)}
+        {'name': 'magic_missile', 'cost': 53,  'turns': 1, 'spell': lambda spell: magic_missile(spell)},
+        {'name': 'drain',         'cost': 73,  'turns': 1, 'spell': lambda spell: drain(spell)},
+        {'name': 'shield',        'cost': 113, 'turns': 6, 'spell': lambda spell: shield(spell)},
+        {'name': 'poison',        'cost': 173, 'turns': 6, 'spell': lambda spell: poison(spell)},
+        {'name': 'recharge',      'cost': 229, 'turns': 5, 'spell': lambda spell: recharge(spell)}
         ]
 
 with open('../input/22.txt') as fp:
