@@ -1,16 +1,17 @@
-def code(x, y, grid):
-    for i in data:
-        for j in i:
-            if   j == 'R': x = min(x + 1,  (2 - abs(y))) # x = min(x + 1,  1))
-            elif j == 'L': x = max(x - 1, -(2 - abs(y))) # x = max(x - 1, -1))
-            elif j == 'U': y = min(y + 1,  (2 - abs(x))) # y = min(y + 1,  1))
-            elif j == 'D': y = max(y - 1, -(2 - abs(x))) # y = max(y - 1, -1))
-        print grid[x, y],
+def code(line):
+    x = 13
+    for i in line:
+        if grid.get(x + move[i]):
+            x += move[i]
+    return '%x'.upper() % grid[x]
 
 with open('../input/2.txt') as f:
     data = f.read().strip().splitlines()
 
-#grid1 = {(-1, 1): 1, (0, 1): 2, (1, 1): 3, (-1, 0): 4, (0, 0): 0, (1, 0): 6, (-1, -1): 7, (0, -1): 8, (1, -1): 9}
-grid2 = {(0, 2): 1, (-1, 1): 2, (0, 1): 3, (1, 1): 4, (-2, 0): 5, (-1, 0): 6, (0, 0): 7, (0, 1): 8, (2, 0): 9, (-1, -1): 'A', (0, -1): 'B', (1, -1): 'C', (0, -2): 'D'}
-#code(0, 0, grid1)
-code(-2, 0, grid2)
+move = {'R': 1, 'L': -1, 'U': -5, 'D': 5}
+
+grid = {7: 1, 8: 2, 9: 3, 12: 4, 13: 5, 14: 6, 17: 7, 18: 8, 19: 9}
+print ''.join(map(code, data))
+
+grid = {3: 1, 7: 2, 8: 3, 9: 4, 11: 5, 12: 6, 13: 7, 14: 8, 15: 9, 17: 10, 18: 11, 19: 12, 23: 13}
+print ''.join(map(code, data))
