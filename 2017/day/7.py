@@ -1,22 +1,21 @@
-with open("../input/7.txt") as f:
-  data = [i.replace(',', '').split() for i in f.readlines()]
+from itertools import chain
 
-part1 = set(i[0] for i in data).difference(set(j for i in data for j in i[2:])).pop()
-print part1
+f = open('../input/7.txt').readlines()
+kids = dict((i.split()[0], i[:-1].replace('-> ', '').replace(',', '').split()[2:]) for i in f)
+weight = dict((i.split()[0], int(i.split()[1].replace(')', '').replace('(', ''))) for i in f)
 
-weight = {}
-for i in xrange(len(data)):
-    data[i][1] = int(data[i][1][1:-1])
-    weight[data[i][0]] = data[i][1]
-    
-m = {part1: -float('inf')}
-while m[part1] == -float('inf'):
-    i = data.pop()
-    above = [m.get(j, -float('inf')) for j in i[3:]]
-    m[i[0]] = i[1] if len(i) == 2 else sum(above) + i[1]
-    if m[i[0]] == -float('inf'):
-        data.insert(0, i)
-    elif len(above) > 0 and above.count(above[0]) != len(above):
-        node = [x for x in i[3:] if above.count(m[x]) == 1][0]
-        print weight[node] + sum(set(above)) - 2 * m[node]
+root = set(kids).difference(set(chain(*kids.values()))).pop()
+
+total = {root: -float('inf')}
+while total[root] == -float('inf'):
+    parent = kids.keys()[0]
+    children = kids.pop(parent)
+    above = [total.get(child, -float('inf')) for child in children]
+    total[parent] = weight[parent] + sum(above)
+    if total[parent] == -float('inf'):
+        kids[parent] = children
+    elif len(above) and above.count(above[0]) != len(above):
+        node = [x for x in children if above.count(total[x]) == 1][0]
+        print root
+        print weight[node] + sum(set(above)) - 2 * total[node]
         break
