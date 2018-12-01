@@ -1,14 +1,6 @@
-from itertools import cycle
-with open('../input/1.txt') as f:
-    data = map(int, f)
+from itertools import cycle, accumulate
+data = list(map(int, open('../input/1.txt').readlines()))
 
-print sum(data)
-f, seen, gen = 0, set(), cycle(data)
-while True:
-    if f in seen:
-        print f
-        break
-    seen.add(f)
-    f += next(gen)
-
-
+seen = set([0])
+print(sum(data))
+print(next(f for f in accumulate(cycle(data)) if f in seen or seen.add(f)))
