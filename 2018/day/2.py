@@ -1,7 +1,8 @@
 from collections import Counter
+from operator import mul
+from itertools import chain
 
 data = open('../input/2.txt').read().strip().splitlines()
-counts = [set(Counter(i).values()) for i in data]
 
-print sum(1 for i in counts if 2 in i) * sum(1 for i in counts if 3 in i)
+print reduce(mul, Counter(chain(*[set(Counter(k).values()).intersection(set([2, 3])) for k in data])).values())
 print next(key for i in range(len(data[0])) for key, val in Counter(k[:i] + k[i+1:] for k in data).iteritems() if val == 2)
