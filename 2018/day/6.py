@@ -1,6 +1,6 @@
 from collections import Counter
 
-data = [map(int, i.split(', ')) for i in open('../input/6.in').readlines()]
+data = [map(int, i.split(', ')) for i in open('../input/6.txt').readlines()]
 
 max_x = max(zip(*data)[0])
 max_y = max(zip(*data)[1])
