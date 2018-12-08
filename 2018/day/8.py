@@ -13,6 +13,4 @@ def solve(child, meta):
 
 data = iter(map(int, open('../input/8.txt').read().split()))
 
-print solve(next(data), next(data))
-
-
+print(solve(next(data), next(data)))
