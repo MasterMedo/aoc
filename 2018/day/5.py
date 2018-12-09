@@ -1,15 +1,5 @@
-from string import ascii_lowercase
-
-def purge(s):
-    i = 1
-    while i < len(s):
-        if abs(ord(s[i-1]) - ord(s[i])) == 32:
-            del s[i-1:i+1]
-            i = max(i-2, 0)
-        i += 1
-    return s
-
-data = purge(list(open('../input/5.in').read().strip()))
+purge = lambda s: reduce(lambda x, y: x[:-1] if x and abs(ord(x[-1])-ord(y)) == 32 else x+y, s)
+data = purge(open('../input/5.txt').read().strip())
 
 print len(data)
-print min(len(purge(filter(lambda x: x.lower() != c, data))) for c in ascii_lowercase)
+print min(len(purge(filter(lambda x: x.upper() != c, data))) for c in map(chr, range(65, 91)))
