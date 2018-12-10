@@ -17,7 +17,7 @@ for sec in count():
 sec -= 1
 data = map(coord, data)
 x1, x2, y1, y2 = boundaries(*zip(*data))
-for i in xrange(y1, y2 + 1):
-    print ''.join('#' if (j, i) in data else ' ' for j in range(x1, x2 + 1))
+for j in range(y1, y2 + 1):
+    print ''.join('#' if (i, j) in data else ' ' for i in range(x1, x2 + 1))
 
 print(sec)
