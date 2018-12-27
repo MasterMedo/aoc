@@ -15,12 +15,12 @@ commands = {
         'bori': lambda r, A, B: r[A] | B,
         'setr': lambda r, A, B: r[A],
         'seti': lambda r, A, B: A,
-        'gtir': lambda r, A, B: 1 if A > r[B] else 0,
-        'gtri': lambda r, A, B: 1 if r[A] > B else 0,
-        'gtrr': lambda r, A, B: 1 if r[A] > r[B] else 0,
-        'eqir': lambda r, A, B: 1 if A == r[B] else 0,
-        'eqri': lambda r, A, B: 1 if r[A] == B else 0,
-        'eqrr': lambda r, A, B: 1 if r[A] == r[B] else 0,
+        'gtir': lambda r, A, B: int(A > r[B]),
+        'gtri': lambda r, A, B: int(r[A] > B),
+        'gtrr': lambda r, A, B: int(r[A] > r[B]),
+        'eqir': lambda r, A, B: int(A == r[B]),
+        'eqri': lambda r, A, B: int(r[A] == B),
+        'eqrr': lambda r, A, B: int(r[A] == r[B]),
         }
 
 ambiguities = 0
