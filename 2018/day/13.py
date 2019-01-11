@@ -1,5 +1,3 @@
-from itertools import count
-
 track, cars, orientation = {}, {}, '>v<^'
 with open('../input/13.txt') as f:
     for y, row in enumerate(f.read().splitlines()):
@@ -9,7 +7,7 @@ with open('../input/13.txt') as f:
                 track[x + y*1j] = '-' if c in '<>' else '|'
                 cars[x + y*1j] = (orientation.index(c), 0)
 
-for tick in count():
+while len(cars) > 1:
     for xy in sorted(cars, key = lambda i: (i.imag, i.real)):
         if xy not in cars:
             continue
@@ -21,10 +19,9 @@ for tick in count():
             w = 3-w if c == '/' else 3*w-3
         xy += 1j**w
         if xy in cars:
-            cars.pop(xy)
+            del cars[xy]
             print 'crash ' + str(xy)
             continue
-        cars.update({xy: (w, t)})
-    if len(cars) == 1:
-        print 'winner ' + str(set(cars).pop())
-        break
+        cars[xy] = (w, t)
+
+print 'winner ' + str(set(cars).pop())
