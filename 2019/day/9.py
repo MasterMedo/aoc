@@ -4,7 +4,7 @@ def intcode(l, inp):
     i = r = 0
     jump = [None, 4, 4, 2, 2, 0, 0, 4, 4, 2]
     while True:
-        opcode, mode = l[i] % 100, str(l[i]//100).zfill(2)[::-1]
+        opcode, mode = l[i] % 100, str(l[i]//100).zfill(3)[::-1]
         arg = lambda x: l[pos(x)]
         def pos(x):
             d = {'0': l[x+i], '1': x+i, '2': r + l[x+i]}
