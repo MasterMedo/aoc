@@ -2,51 +2,39 @@ with open('../input/5.txt') as f:
     l = list(map(int, f.read().split(',')))
 
 i = 0
+jump = [None, 4, 4, 2, 2, 0, 0, 4, 4, 2]
 while True:
-    optcode = l[i] % 100
-    mode = list(reversed(list(map(int, str(l[i]//100)))))
-    state = lambda x: l[x] if x-i-1 >= len(mode) or mode[x-i-1] == 0 else x
-    arg = lambda x: l[state(x)]
+    opcode, mode = l[i] % 100, str(l[i]//100).zfill(2)[::-1]
+    arg = lambda x: l[l[i+x]] if mode[x-1] == '0' else l[i+x]
 
-    if   optcode == 99: # halt
+    if   opcode == 99: # halt
         break
 
-    elif optcode ==  1: # add
-        l[l[i+3]] = arg(i+1) + arg(i+2)
-        i += 4
+    elif opcode ==  1: # add
+        l[l[i+3]] = arg(1) + arg(2)
 
-    elif optcode ==  2: # multiply
-        l[l[i+3]] = arg(i+1) * arg(i+2)
-        i += 4
+    elif opcode ==  2: # multiply
+        l[l[i+3]] = arg(1) * arg(2)
 
-    elif optcode ==  3: # input
+    elif opcode ==  3: # input
         l[l[i+1]] = int(input('input a number: '))
-        i += 2
 
-    elif optcode ==  4: # output
-        print(f'output: {arg(i+1)}')
-        i += 2
+    elif opcode ==  4: # output
+        print(f'output: {arg(1)}')
 
-    elif optcode ==  5: # jump if true
-        if arg(i+1):
-            i = arg(i+2)
-        else:
-            i += 3
+    elif opcode ==  5: # jump if true
+        i = arg(2) if arg(1) else i+3
 
-    elif optcode ==  6: # jump if false
-        if arg(i+1) == 0:
-            i = arg(i+2)
-        else:
-            i += 3
+    elif opcode ==  6: # jump if false
+        i = arg(2) if not arg(1) else i+3
 
-    elif optcode ==  7: # less than
-        l[l[i+3]] = 1 if arg(i+1) < arg(i+2) else 0
-        i += 4
+    elif opcode ==  7: # less than
+        l[l[i+3]] = 1 if arg(1) < arg(2) else 0
 
-    elif optcode ==  8: # equals
-        l[l[i+3]] = 1 if arg(i+1) == arg(i+2) else 0
-        i += 4
+    elif opcode ==  8: # equals
+        l[l[i+3]] = 1 if arg(1) == arg(2) else 0
 
-    else: # error
-        print(f'error: {optcode}')
-        exit()
+    else:              # error
+        raise Exception(f'invalid opcode {opcode}')
+
+    i += jump[opcode]
