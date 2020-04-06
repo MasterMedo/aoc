@@ -1,64 +1,53 @@
 from collections import defaultdict
 
-with open('../input/9.txt') as f:
-    l = defaultdict(int, dict(enumerate(map(int, f.read().split(',')))))
+def intcode(l, inp):
+    i = r = 0
+    jump = [None, 4, 4, 2, 2, 0, 0, 4, 4, 2]
+    while True:
+        opcode, mode = l[i] % 100, str(l[i]//100).zfill(2)[::-1]
+        arg = lambda x: l[pos(x)]
+        def pos(x):
+            d = {'0': l[x+i], '1': x+i, '2': r + l[x+i]}
+            return d[mode[x-1]]
 
-i = r = 0
-while True:
-    optcode = l[i] % 100
-    mode = list(reversed(list(map(int, str(l[i]//100)))))
-    arg = lambda x: l[state(x)]
-    def state(x):
-        if x-i-1 >= len(mode) or mode[x-i-1] == 0:
-            return l[x]
-        elif mode[x-i-1] == 1:
-            return x
-        elif mode[x-i-1] == 2:
-            return r + l[x]
+        if   opcode == 99: # halt
+            break
 
-    if   optcode == 99: # halt
-        break
+        elif opcode ==  1: # add
+            l[pos(3)] = arg(1) + arg(2)
 
-    elif optcode ==  1: # add
-        l[state(i+3)] = arg(i+1) + arg(i+2)
-        i += 4
+        elif opcode ==  2: # multiply
+            l[pos(3)] = arg(1) * arg(2)
 
-    elif optcode ==  2: # multiply
-        l[state(i+3)] = arg(i+1) * arg(i+2)
-        i += 4
+        elif opcode ==  3: # input
+            l[pos(1)] = next(inp)
 
-    elif optcode ==  3: # input
-        l[state(i+1)] = int(input('input a number: '))
-        i += 2
+        elif opcode ==  4: # output
+            yield arg(1)
 
-    elif optcode ==  4: # output
-        print(f'output: {arg(i+1)}')
-        i += 2
+        elif opcode ==  5: # jump if true
+            i = arg(2) if arg(1) else i+3
 
-    elif optcode ==  5: # jump if true
-        if arg(i+1):
-            i = arg(i+2)
-        else:
-            i += 3
+        elif opcode ==  6: # jump if false
+            i = arg(2) if not arg(1) else i+3
 
-    elif optcode ==  6: # jump if false
-        if arg(i+1) == 0:
-            i = arg(i+2)
-        else:
-            i += 3
+        elif opcode ==  7: # less than
+            l[pos(3)] = 1 if arg(1) < arg(2) else 0
 
-    elif optcode ==  7: # less than
-        l[state(i+3)] = 1 if arg(i+1) < arg(i+2) else 0
-        i += 4
+        elif opcode ==  8: # equals
+            l[pos(3)] = 1 if arg(1) == arg(2) else 0
 
-    elif optcode ==  8: # equals
-        l[state(i+3)] = 1 if arg(i+1) == arg(i+2) else 0
-        i += 4
+        elif opcode ==  9: # relative_base
+            r += arg(1)
 
-    elif optcode ==  9: # relative_base
-        r += arg(i+1)
-        i += 2
+        else:              # error
+            raise Exception(f'invalid opcode {opcode}')
 
-    else:               # error
-        print(f'error: {optcode}')
-        exit()
+        i += jump[opcode]
+
+if __name__ == '__main__':
+    with open('../input/9.txt') as f:
+        l = defaultdict(int, dict(enumerate(map(int, f.read().split(',')))))
+
+    for o in intcode(l, (int(input('input: ')) for _ in iter(int, 1))):
+        print(f'output: {o}')
