@@ -1,5 +1,5 @@
 with open('../input/6.txt') as f:
-    data = zip(*f.readlines())[:-1]
+    columns = list(zip(*f.read().split('\n')[:-1]))
 
-print ''.join(max(set(lst), key = lst.count) for lst in data)
-print ''.join(min(set(lst), key = lst.count) for lst in data)
+print(''.join(max(set(c), key = c.count) for c in columns))
+print(''.join(min(set(c), key = c.count) for c in columns))
