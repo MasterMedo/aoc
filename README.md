@@ -2,7 +2,9 @@
 
 ### python only branch
 
-- in each repository you can find the table of currently finished tasks
+In 2015 I focused primarily on learning the quirks of python.
+Most of the code there are oneliners, sometimes even readable ones.
+There's a lot of switching back and forth between python 2 and 3.
+Took me a while to transition completely.
 
-note that for now some tasks were solved in other programming languages
-you can find them in the non-python branch
+The focus now is writing concise and succint code.
