@@ -1,25 +1,15 @@
-def org(i):
-    i = i.replace(':', '').replace(',', '').split()
-    return int(i[1]), {x: int(y) for x,y in zip(i[2::2], i[3::2])}
+import re
 
-with open('../input/16.txt') as f, open('../input/16-ticker-tape.txt') as ftt:
-    data = dict(org(i[:-1]) for i in f.readlines())
-    tt = {y: int(z) for x in ftt.readlines() for y, z in [x.replace(':', '').split()]}
+with open('../input/16.txt') as f, open('../input/16tape.txt') as ftt:
+    data = [{x[:3]: int(y) for x, y in re.findall(r'(\w+): (\d+)', line)}
+            for line in f]
+    tape = {x[:3]: int(y) for x, y in map(lambda l: l.split(': '), ftt)}
 
-for i in data:
-    for j in tt:
-        if j in data[i] and tt[j] != data[i][j]:
-            break
-    else:
-        print i
+print(next(aunt+1 for aunt, test in enumerate(data)
+            if all(tape[i] == test[i] for i in test)))
 
-for i in data:
-    for j in tt:
-        if j in data[i] and \
-        (j not in ('cats', 'trees', 'pomerians', 'goldfish') and tt[j] != data[i][j] or \
-        j in ('cats', 'trees') and tt[j] >= data[i][j] or \
-        j in ('pomeranians', 'goldfish') and tt[j] <= data[i][j]):
-            break
-    else:
-        print i
-
+print(next(aunt+1 for aunt, test in enumerate(data)
+            if all(i not in {'cat', 'tre', 'pom', 'gol'} and tape[i] == test[i]
+                    or i in {'cat', 'tre'} and tape[i] < test[i]
+                    or i in {'pom', 'gol'} and tape[i] > test[i]
+                    for i in test)))
