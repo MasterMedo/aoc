@@ -1,26 +1,21 @@
-from operator import mul
+import re
+from math import prod
 
-def prod(iterable):
-    return reduce(mul, iterable, 1)
+with open('../input/15.txt') as f:
+    data = [list(map(int, re.findall(r'-?\d+', line))) for line in f]
 
-def org(x):
-    x = x.replace(',','').split()
-    return x[0][:-1], [int(x[2]), int(x[4]), int(x[6]), int(x[8]), int(x[-1])]
+max_score, best_cookie_score = 0, 0
+for i in range(101):
+    for j in range(101-i):
+        for k in range(101-i-j):
+            l = 100-i-j-k
+            score = prod(max(0, sum(y*z for y,z in zip(x, (i,j,k,l))))
+                    for x in list(zip(*data))[:-1])
 
-with open('../input/15.txt') as fp:
-    data = dict([org(x[:-1]) for x in fp.readlines()])
+            calories = sum(x[-1]*y for x, y in zip(data, (i,j,k,l)))
+            max_score = max(max_score, score)
+            if calories == 500:
+                best_cookie_score = max(best_cookie_score, score)
 
-m, c = 0, 0
-for i in xrange(0, 101):
-    for j in xrange(0, 101):
-        for k in xrange(0, 101):
-            for l in xrange(0, 101):
-                if i + j + k + l == 100:
-                    s = [sum([data[x][z] * y for x, y in zip(data, [i, j, k, l])]) for z in xrange(4)]
-                    if min(s) > 0:
-                        m = max(m, prod(s))
-                        if sum([data[x][-1] * y for x, y in zip(data, [i, j, k, l])]) == 500:
-                            c = max(c, prod(s))
-
-print m
-print c
+print(max_score)
+print(best_cookie_score)
