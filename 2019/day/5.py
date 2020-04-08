@@ -1,8 +1,7 @@
 with open('../input/5.txt') as f:
     l = list(map(int, f.read().split(',')))
 
-i = 0
-jump = [None, 4, 4, 2, 2, 0, 0, 4, 4, 2]
+i, jump = 0, [None, 4, 4, 2, 2, 0, 0, 4, 4, 2]
 while True:
     opcode, mode = l[i] % 100, str(l[i]//100).zfill(2)[::-1]
     arg = lambda x: l[l[i+x]] if mode[x-1] == '0' else l[i+x]
@@ -29,10 +28,10 @@ while True:
         i = arg(2) if not arg(1) else i+3
 
     elif opcode ==  7: # less than
-        l[l[i+3]] = 1 if arg(1) < arg(2) else 0
+        l[l[i+3]] = arg(1) < arg(2)
 
     elif opcode ==  8: # equals
-        l[l[i+3]] = 1 if arg(1) == arg(2) else 0
+        l[l[i+3]] = arg(1) == arg(2)
 
     else:              # error
         raise Exception(f'invalid opcode {opcode}')
