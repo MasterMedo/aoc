@@ -1,9 +1,11 @@
-def solve(c, x, n):
-    # return n if len(c) == 0 else min([solve(c.difference({y}), y, n + data.get((x, y), data.get((y, x), 0))) for y in c])
-    return n if len(c) == 0 else max([solve(c.difference({y}), y, n + data.get((x, y), data.get((y, x), 0))) for y in c])
+from itertools import permutations, chain
 
-with open('../input/9.txt') as fp:
-    data = dict([((i.split()[0], i.split()[2]), int(i.split()[4])) for i in fp.read().strip().splitlines()])
+with open('../input/9.txt') as f:
+    edges = {frozenset({x, y}): int(z) for x, _, y, _, z in map(str.split, f)}
 
-cities = {city for pair in data for city in pair}
-print solve(cities, 'anything', 0)
+cities = set(chain(*edges))
+paths = [sum(edges[frozenset({x, y})] for x, y in zip(p[:-1], p[1:]))
+         for p in permutations(cities)]
+
+print(min(paths))
+print(max(paths))
