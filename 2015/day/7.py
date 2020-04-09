@@ -1,30 +1,23 @@
-def org(l):
-    l[0] = l[0].split()
-    if len(l[0]) == 1:
-        return l[1], [lambda a, b: get(a), l[0][0], None]
-    return l[1], [f[l[0][-2]], l[0][0], l[0][-1]]
+def get(x):
+    if type(x) == int or x.isdigit():
+        power[x] = int(x)
+    elif x not in power:
+        function, a, b, = data[x]
+        power[x] = function(a, b)
+    return power[x]
 
-def get(key):
-    if key not in m and (isinstance(key, int) or key.isdigit()):
-        m[key] = int(key)
-    elif key not in m:
-        m[key] = data[key][0](data[key][1], data[key][-1]) 
-    return m[key]
+def o(ins):
+    if 'NOT'    in ins: return lambda a, b: ~ get(b)
+    if 'AND'    in ins: return lambda a, b: get(a) & get(b)
+    if 'OR'     in ins: return lambda a, b: get(a) | get(b)
+    if 'RSHIFT' in ins: return lambda a, b: get(a) >> get(b)
+    if 'LSHIFT' in ins: return lambda a, b: get(a) << get(b)
+    else:               return lambda a, b: get(a)
 
-f = { 
-        'NOT'   : lambda a, b: ~ get(b),
-        'AND'   : lambda a, b: get(a) & get(b),
-        'OR'    : lambda a, b: get(a) | get(b),
-        'RSHIFT': lambda a, b: get(a) >> get(b),
-        'LSHIFT': lambda a, b: get(a) << get(b),
-    }
+with open('../input/7.txt') as f:
+    data = {x: (o(i), i[0], i[-1]) for *i, _, x in map(str.split, f)}
 
-with open('../input/7.txt') as fp:
-    data = dict([org(i[:-1].split(' -> ')) for i in fp.readlines()])
-
-m = {}
-firstPart, m = get('a'), {}
-data['b'] = [lambda a, b: get(a), firstPart, None]
-
-print firstPart
-print get('a')
+power = {}
+print(a := get('a'))
+power = {'b': a}
+print(get('a'))
