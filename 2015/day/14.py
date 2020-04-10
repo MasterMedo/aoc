@@ -1,25 +1,27 @@
-def org(i):
-    i = i.split()
-    return (i[0], (int(i[3]), int(i[6]), int(i[-2])))
+with open('../input/14.txt') as f:
+    raindeers = [[int(w) for w in words if w.isdigit()]
+                    for raindeer, *words in map(str.split, f)]
 
-with open('../input/14.txt') as fp:
-    data = dict([org(i[:-1]) for i in fp.readlines()])
+time = 2503
+print(max(speed * (-rest * ((time + rest) // (duration + rest)) + time)
+          for speed, duration, rest in raindeers))
 
-m, l, p = 2503, [], {x: [0, 0, 0] for x in data}
-for i in data.values():
-    l.append(i[0] * (-i[2] * ((m + i[2]) // (i[1] + i[2])) + m))
-    
-print max(l)
-for i in xrange(m):
-    for j in data:
-        if p[j][2] <= -data[j][1]:
-            p[j][2] = data[j][2]
-        elif p[j][2] <= 0:
-            p[j][1] += data[j][0]
-        p[j][2] -= 1
-    m = max([p[i][1] for i in p])
-    for j in p:
-        if p[j][1] == m:
-            p[j][0] += 1
+points = [0]*len(raindeers)
+distance = [0]*len(raindeers)
+flying = [duration-1 for _, duration, _ in raindeers]
+for i in range(time):
+    for raindeer, (speed, duration, rest) in enumerate(raindeers):
+        if   flying[raindeer] >= 0:
+            distance[raindeer] += speed
 
-print max([p[i][0] for i in p])
+        elif flying[raindeer] <= -rest:
+            flying[raindeer] = duration
+
+        flying[raindeer] -= 1
+
+    max_distance = max(distance)
+    for raindeer in range(len(distance)):
+        if distance[raindeer] == max_distance:
+            points[raindeer] += 1
+
+print(max(points))
