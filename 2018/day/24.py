@@ -9,7 +9,6 @@ class group:
         if '' in tmp: tmp.remove('')
         traits = {t: tt for t, _, *tt in map(str.split, tmp)}
 
-        self.id         = index
         self.population = population
         self.units      = int(words[0])
         self.hp         = int(words[4])
@@ -30,9 +29,6 @@ class group:
     def effpower(self):
         return self.units * self.dmg
 
-    def __repr__(self):
-        return str(vars(self))
-
     def damage(self, target):
         if self.dmgtype in target.immune: return 0
         if self.dmgtype in target.weak:   return 2 * self.effpower
@@ -49,6 +45,8 @@ def game(groups):
     while len(set(g.population for g in groups)) > 1:
         attacked = set()
         multikey = attrgetter('effpower', 'initiative')
+
+        # selection phase
         for group in sorted(groups, key=multikey, reverse=True):
             enemies = filter(lambda g: g.population != group.population,
                             groups-attacked)
@@ -56,26 +54,29 @@ def game(groups):
             for target in sorted(enemies, key=multikey, reverse=True):
                 if group.damage(target):
                     group.target = target
-                    attacked.add(group.target)
+                    attacked.add(target)
                 break
-        if not len(attacked):
-            break
+
+        # attacking phase
         for group in sorted(groups, key=attrgetter('initiative'), reverse=True):
             if group in groups and group.target:
                 group.attack()
                 if not group.target.units:
                     groups.remove(group.target)
                 group.target = ''
+
+        if not len(attacked):
+            break
+
     return groups
 
 done, boost, groups = 0, 0, set()
 with open('../input/24.txt') as f:
-    for _ in range(2):
-        population = line if (line := next(f)[:-2]) else next(f)[:-2]
-        while True:
-            groups.add(group(len(groups)%10+1, population, next(f)))
-            if not len(groups) % 10:
-                break
+    for army in f.read()[:-1].split('\n\n'):
+        lines = iter(army.split('\n'))
+        population = next(lines)[:-1]
+        for line in lines:
+            groups.add(group(len(groups), population, line))
 
 while done < 2:
     result = game(deepcopy(groups))
