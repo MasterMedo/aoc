@@ -1,4 +1,3 @@
-from time import sleep
 from collections import deque
 
 def run(instructions, p=0):
