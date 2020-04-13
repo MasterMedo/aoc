@@ -1,10 +1,10 @@
+import math
 with open('../input/14.txt') as f:
     raindeers = [[int(w) for w in words if w.isdigit()]
                     for raindeer, *words in map(str.split, f)]
 
 time = 2503
-print(max(speed * (-rest * ((time + rest) // (duration + rest)) + time)
-          for speed, duration, rest in raindeers))
+print(max((time//(duration+rest)*duration + min(time %(duration+rest),duration)) * speed for speed, duration, rest in raindeers))
 
 points = [0]*len(raindeers)
 distance = [0]*len(raindeers)
