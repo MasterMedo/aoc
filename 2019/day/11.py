@@ -4,19 +4,17 @@ intcode = __import__('9').intcode
 with open('../input/11.txt') as f:
     l = defaultdict(int, dict(enumerate(map(int, f.read().split(',')))))
 
-xy, d = 0j, 1j
-grid = defaultdict(int)
-grid[0] = 1 # comment for part 1
+xy, d = 0j, -1j
+colors = defaultdict(int)
+colors[0] = 1 # comment for part 1
 
-for i, o in enumerate(intcode(l, (grid[xy] for _ in iter(int, 1)))):
-    if i % 2 == 0:
-        grid[xy] = o
-    else:
-        d *= 1j**(-1)**o
-        xy += d
+robot = intcode(l, (colors[xy] for _ in iter(int, 1)))
+for color in robot:
+    turn = next(robot)
+    colors[xy] = color
+    d /= 1j**(-1)**turn
+    xy += d
 
-# print(len(grid)) # uncomment for part 1
-for y in range(0, -6, -1):
-    for x in range(0, 40):
-        print('#' if grid[x+y*1j] else ' ', end='')
-    print()
+# print(len(colors)) # uncomment for part 1
+for y in range(6):
+    print(''.join('#' if colors[x+y*1j] else ' ' for x in range(40)))
