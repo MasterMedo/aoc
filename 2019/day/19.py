@@ -1,10 +1,9 @@
-from collections import defaultdict
 intcode = __import__('9').intcode
 
 with open('../input/19.txt') as f:
-    tape = dict(enumerate(map(int, f.read().split(','))))
+    tape = list(map(int, f.read().split(',')))
 
-ray = lambda x, y: next(intcode(defaultdict(int, tape), iter([x, y])))
+ray = lambda x, y: next(intcode(tape, iter([x, y])))
 
 y, start = -1, 0
 rows = {y: [start, start]}
@@ -32,4 +31,4 @@ while y <= 100 or rows[y-99][1] - start < 100:
 
     rows[y] = [start, x]
 
-print(start*10000+y-99)
+print(start*10000 + y - 99)

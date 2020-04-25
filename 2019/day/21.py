@@ -1,8 +1,7 @@
-from collections import defaultdict
 intcode = __import__('9').intcode
 
 with open('../input/21.txt') as f:
-    tape = dict(enumerate(map(int, f.read().split(','))))
+    tape = list(map(int, f.read().split(',')))
 
 part1 = """
 OR A J
@@ -25,8 +24,8 @@ AND D J
 RUN
 """
 springscript = (ord(c) for c in part2[1:])
-for output in intcode(defaultdict(int, tape), springscript):
-    if output < 1000:
+for output in intcode(tape, springscript):
+    if output <= 1114111:
         print(chr(output), end='')
 
 print(output)

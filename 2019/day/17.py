@@ -3,13 +3,13 @@ from itertools import takewhile, count, chain
 intcode = __import__('9').intcode
 
 with open('../input/17.txt') as f:
-    tape = dict(enumerate(map(int, f.read().split(','))))
+    tape = list(map(int, f.read().split(',')))
 
 direction = {'^': -1j, 'v': 1j, '>': 1, '<': -1}
 grid = defaultdict(lambda: '.')
 zw = xy = 0j
 d = None
-for c in map(chr, intcode(defaultdict(int, tape), None)):
+for c in map(chr, intcode(tape, None)):
     if c == '\n':
         zw = (zw.imag+1)*1j
         continue
@@ -64,6 +64,6 @@ B = 'L,10,R,10,L,6\n'
 C = 'R,10,R,12,R,10\n'
 
 tape[0] = 2
-for output in intcode(defaultdict(int, tape), robot_input(main, A, B, C)):
+for output in intcode(tape, robot_input(main, A, B, C)):
     if output > 50000:
         print(output)

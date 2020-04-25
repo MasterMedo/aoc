@@ -1,4 +1,3 @@
-from collections import defaultdict
 from threading import Thread
 from queue import Queue
 from time import sleep
@@ -28,18 +27,18 @@ def run(computer, i):
         # print(f'{i} sending {package} to {destination}')
 
 with open('../input/23.txt') as f:
-    tape = dict(enumerate(map(int, f.read().split(','))))
+    tape = list(map(int, f.read().split(',')))
 
 queue = [Queue() for _ in range(50)]
 last_y = NAT = None
 for i in range(50):
-    computer = intcode(defaultdict(int, tape), reciever(i))
+    computer = intcode(tape, reciever(i))
     t = Thread(target=run, args=(computer, i), daemon=True)
     t.start()
 
 while True:
     if all(q.empty() for q in queue):
-        sleep(2)
+        sleep(2) # tries to ensure that all threads are waiting for input
         if any(not q.empty() for q in queue):
             continue
         if last_y == NAT[1]:

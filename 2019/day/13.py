@@ -1,17 +1,21 @@
 from collections import defaultdict
-intcode = __import__('9').intcode
+from time import sleep
+
 from blessed import Terminal
+
+intcode = __import__('9').intcode
 term = Terminal()
 
 with open('../input/13.txt') as f:
-    tape = defaultdict(int, dict(enumerate(map(int, f.read().split(',')))))
+    tape = list(map(int, f.read().split(',')))
 
 def player_input():
     key = {'h': -1, 'LEFT': -1, 'l': 1, 'RIGHT': 1}
     while True:
-        # print(term.home, end='', flush=True)
-        # for y in range(50, 0, -1):
-        #     print(''.join(' |#_*'[grid.get((x, y), 0)] for x in range(50)))
+        sleep(0.1)
+        print(term.home, end='', flush=True)
+        for y in range(50, 0, -1):
+            print(''.join(' |#_*'[grid.get((x, y), 0)] for x in range(50)))
         # char = term.inkey()
         # yield key.get(char.name[4:] if char.is_sequence else char, 0)
         yield -1 if ball < player else ball > player

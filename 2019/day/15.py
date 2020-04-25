@@ -16,7 +16,7 @@ def draw(xy=None):
     sleep(0.01)
 
 with open('../input/15.txt') as f:
-    l = defaultdict(int, dict(enumerate(map(int, f.read().split(',')))))
+    tape = list(map(int, f.read().split(',')))
 
 xy = 0j
 actions = [3, 1, 4, 2]
@@ -24,7 +24,7 @@ moves = deque(reversed(actions))
 move, power = moves[-1], actions.index(moves[-1])
 grid = defaultdict(lambda: -2, {0: -1, 1j: -1, -1j: -1, 1: -1, -1: -1})
 
-for block in intcode(l, (moves.pop() for _ in iter(int, 1))):
+for block in intcode(tape, (moves.pop() for _ in iter(int, 1))):
     if block == 0: # wall
         grid[xy + 1j**power] = 0
 

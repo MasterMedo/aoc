@@ -1,6 +1,8 @@
 from collections import defaultdict
+from typing import List, Iterator
 
-def intcode(tape, int_input):
+def intcode(tape: List[int], int_input: Iterator[int]) -> Iterator[int]:
+    tape = defaultdict(int, dict(enumerate(tape)))
     i = rb = 0
     jump  = [4, 4, 2, 2, 0, 0, 4, 4, 2]
     modes = lambda x, m: [tape[x+i], x+i, rb+tape[x+i]][m]
