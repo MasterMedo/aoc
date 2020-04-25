@@ -28,7 +28,7 @@ def intcode(tape: List[int], int_input: Iterator[int]) -> Iterator[int]:
 
 if __name__ == '__main__':
     with open('../input/9.txt') as f:
-        l = defaultdict(int, dict(enumerate(map(int, f.read().split(',')))))
+        tape = list(map(int, f.read().split(',')))
 
-    for o in intcode(l, (int(input('input: ')) for _ in iter(int, 1))):
+    for o in intcode(tape, (int(input('input: ')) for _ in iter(int, 1))):
         print(f'output: {o}')
