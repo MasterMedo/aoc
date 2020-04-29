@@ -21,26 +21,24 @@ with open('../input/15.txt') as f:
 xy = 0j
 actions = [3, 1, 4, 2]
 moves = deque(reversed(actions))
-move, power = moves[-1], actions.index(moves[-1])
+move, direction = moves[-1], actions.index(moves[-1])
 grid = defaultdict(lambda: -2, {0: -1, 1j: -1, -1j: -1, 1: -1, -1: -1})
 
 for block in intcode(tape, (moves.pop() for _ in iter(int, 1))):
-    if block == 0: # wall
-        grid[xy + 1j**power] = 0
-
-    else:
-        xy += 1j**power
+    zw = xy + 1j**direction
+    if block:
+        xy = zw
         if grid[xy] == -1: # unexplored
-            grid[xy] = block
-            moves.append(actions[(power+2)%4])
+            moves.append(actions[(direction+2)%4])
             for p, m in enumerate(actions):
                 if grid[xy+1j**p] == -2: # not seen
                     moves.append(m)
                     grid[xy+1j**p] = -1
     # draw(xy)
+    grid[zw] = block
     if not moves:
         break
-    power = actions.index(moves[-1])
+    direction = actions.index(moves[-1])
 
 visited = set(xy for xy in grid if grid[xy] == 0)
 to_visit = deque([(xy, 0) for xy in grid if grid[xy] == 2])
