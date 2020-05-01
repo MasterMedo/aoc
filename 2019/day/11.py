@@ -9,8 +9,7 @@ colors = defaultdict(int)
 colors[0] = 1 # comment for part 1
 
 robot = intcode(tape, (colors[xy] for _ in iter(int, 1)))
-for color in robot:
-    turn = next(robot)
+for color, turn in iter(lambda: [next(robot), next(robot)], 1):
     colors[xy] = color
     d /= 1j**(-1)**turn
     xy += d
