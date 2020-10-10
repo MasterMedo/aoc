@@ -1,19 +1,16 @@
-def walk(n, i, x):
-    for _ in xrange(n):
-        xy[i] += x
-        if tuple(xy) in grid and not part2:
-            part2.append(abs(xy[0]) + abs(xy[1]))
-        grid.append(tuple(xy))
+with open('../input/1.txt') as f:
+    data = f.read().strip().split(', ')
 
-with open('../input/1.txt') as fp:
-    data = fp.read().strip().split(', ')
+zw = None
+xy = angle = 0
+visited = set()
+for direction, *steps in data:
+    angle += 1 if direction == 'R' else -1
+    for _ in range(int(''.join(steps))):
+        xy += 1j**angle
+        if zw is None and xy in visited:
+            zw = xy
+        visited.add(xy)
 
-part2, grid, xy, angle = [], [], [0, 0], 0
-sides = ((1, 1), (0, 1), (1, -1), (0, -1))
-for i in data:
-    angle += 1 if i[0] == 'R' else -1
-    angle %= 4
-    walk(int(i[1:]), *sides[angle])
-
-print abs(xy[0]) + abs(xy[1])
-print part2.pop()
+print(int(abs(xy.real) + abs(xy.imag)))
+print(int(abs(zw.real) + abs(zw.imag)))
