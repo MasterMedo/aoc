@@ -1,16 +1,22 @@
-import hashlib
-import itertools
+from hashlib import md5
+from itertools import count
 
 with open("../input/5.txt") as f:
     data = f.read().strip()
 
-password = [-1 for i in range(8)]
-for i in itertools.count():
-    hex = hashlib.md5((data + str(i)).encode()).hexdigest()
-    n = int(hex[5], 16)
-    if hex[:5] == ('00000') and 0 <= n <= 7 and password[n] == -1:
-            password[n] = hex[6]
-            if -1 not in password:
+part1 = []
+part2 = [-1]*8
+for i in count():
+    code = md5((data + str(i)).encode()).hexdigest()
+    n = int(code[5], 16)
+    if code.startswith('00000'):
+        if len(part1) < 8:
+            part1.append(code[5])
+
+        if 0 <= (n := int(code[5], 16)) <= 7 and part2[n] == -1:
+            part2[n] = code[6]
+            if -1 not in part2:
                 break
 
-print ''.join(password)
+print(''.join(part1))
+print(''.join(part2))
