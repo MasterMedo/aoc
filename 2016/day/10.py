@@ -2,24 +2,25 @@ from collections import defaultdict
 
 bot = defaultdict(list)
 output = defaultdict(list)
+children = {}
 
 with open('../input/10.txt') as f:
-    children = {}
-    for line in map(str.split, f):
-        if line[0] == 'value':
-            bot[int(line[-1])].append(int(line[1]))
+    for command, *args in map(str.split, f):
+        if command == 'value':
+            value, *_, index = args
+            bot[int(index)].append(int(value))
         else:
-            children[int(line[1])] = line[ 5] +'['+ line[ 6] +']', \
-                                     line[-2] +'['+ line[-1] +']'
+            index, _, _, _, x, low, *_, y, high = args
+            children[int(index)] = f'{x}[{low}]', f'{y}[{high}]'
 
 while bot:
-    for bot_n, v in dict(bot).iteritems():
-        if len(v) == 2:
-            v1, v2 = sorted(bot.pop(bot_n))
-            lower, higher = children[bot_n]
-            eval(lower).append(v1)
-            eval(higher).append(v2)
-            if v1 == 17 and v2 == 61:
-                print(bot_n)
+    for index, values in dict(bot).items():
+        if len(values) == 2:
+            low, high = sorted(bot.pop(index))
+            lower, higher = children[index]
+            eval(lower).append(low)
+            eval(higher).append(high)
+            if low == 17 and high == 61:
+                print(index)
 
-print output[0][0] * output[1][0] * output[2][0]
+print(output[0][0] * output[1][0] * output[2][0])
