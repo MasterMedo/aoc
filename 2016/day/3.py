@@ -1,6 +1,7 @@
 with open('../input/3.txt') as f:
-    data = [map(int, i.split()) for i in f.readlines()]
+    data = [list(map(int, args)) for args in map(str.split, f)]
 
-print sum(1 for i in data if max(i) < sum(i) - max(i))
-print sum(1 for i, j, k in zip(data[0::3], data[1::3], data[2::3])
-        for l in zip(i, j, k) if max(l) < sum(l) - max(l))
+print(sum(0 < sum(sides) - 2*max(sides) for sides in data))
+print(sum(0 < sum(sides) - 2*max(sides)
+          for three_by_three in zip(data[::3], data[1::3], data[2::3])
+          for sides in zip(*three_by_three)))
