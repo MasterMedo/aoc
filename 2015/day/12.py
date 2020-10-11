@@ -1,20 +1,23 @@
 import json
 
-def nsum(x):
-    if isinstance(x, int):
-        return x
-    if isinstance(x, dict):
-        if 'red' in x.values():
+
+def sum_(data, exclude=None, s=0):
+    if isinstance(data, int):
+        return data
+
+    if isinstance(data, dict):
+        if exclude in data.values():
             return 0
-    s = 0
-    for i in x:
-        if isinstance(x, (list, tuple)):
-            s += nsum(i)
-        elif isinstance(x, dict):
-            s += nsum(x[i])
+        s += sum(sum_(i, exclude) for i in data.values())
+
+    if isinstance(data, (list, tuple)):
+        s += sum(sum_(i, exclude) for i in data)
+
     return s
 
-with open('../input/12.txt') as fp:
-    data = json.load(fp)
 
-print nsum(data)
+with open('../input/12.txt') as f:
+    data = json.load(f)
+
+print(sum_(data))
+print(sum_(data, exclude='red'))
