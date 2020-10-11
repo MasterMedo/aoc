@@ -1,8 +1,16 @@
+import re
+
+
+def common(soup):
+    return set(sorted(set(soup), key=lambda c: (-soup.count(c), c))[:5])
+
+
+def rot(soup, n):
+    return ''.join(chr((ord(c) - 97 + int(n)) % 26 + 97) for c in soup)
+
+
 with open('../input/4.txt') as f:
-    data = [(''.join(line.split('-')[:-1]), line[:-2].split('-')[-1].split('[')) for line in f.readlines()]
+    data = [re.split(r'-|\[', line[:-2]) for line in f]
 
-print sum(int(i[1][0]) for i in data if set(i[1][1]) == set(list(set(sorted(sorted(i[0]), key=i[0].count, reverse=True)))[:5]))
-
-for line in data:
-    if 'north' in ''.join(chr((ord(i) - 97 + int(line[1][0])) % 26 + 97) for i in line[0]):
-        print line[1][0]
+print(sum(int(n) for *abc, n, chk in data if set(chk) == common(''.join(abc))))
+print(next(n for *abc, n, chk in data if 'north' in rot(''.join(abc), n)))
