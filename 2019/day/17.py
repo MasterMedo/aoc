@@ -1,5 +1,4 @@
 from collections import defaultdict
-from itertools import takewhile, count, chain
 intcode = __import__('9').intcode
 
 with open('../input/17.txt') as f:
@@ -38,7 +37,7 @@ while '#' in {grid[xy+d], grid[xy+d*1j], grid[xy+d/1j]}:
         path.append(forward)
         forward = 0
 
-    if   grid[xy+d*1j] == '#':
+    if grid[xy+d*1j] == '#':
         path.append('R')
         d *= 1j
 
@@ -51,12 +50,14 @@ path.append(forward)
 # print(path) # manually get: A, B, C ain't that hard
 path = list(map(str, path))
 
+
 def robot_input(*patterns):
     for pattern in patterns:
         for c in pattern:
             yield ord(c)
     yield ord('n')
     yield ord('\n')
+
 
 main = 'A,C,A,C,B,B,C,A,C,B\n'
 A = 'L,8,R,12,R,12,R,10\n'
