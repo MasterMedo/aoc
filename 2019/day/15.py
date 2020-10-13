@@ -4,6 +4,7 @@ intcode = __import__('9').intcode
 with open('../input/15.txt') as f:
     tape = list(map(int, f.read().split(',')))
 
+i = None
 xy = 0
 reverse = [2, 1, 4, 3]
 moves = list(range(1, 5))
@@ -27,12 +28,12 @@ for block in robot:
     if not moves:
         break
 
-# for y in range(21, -20,-1):
-#     print(''.join('#.$ ?'[grid[x+y*1j]] if x+y*1j != xy else 'D' 
+# for y in range(21, -20, -1):
+#     print(''.join('#.$ ?'[grid[x+y*1j]] if x+y*1j != xy else 'D'
 #                   for x in range(-21, 22)))
 
 xy = 0
-xy = next(xy for xy in grid if grid[xy] == 2) # comment for part1
+# xy = next(xy for xy in grid if grid[xy] == 2)  # uncomment for part2
 visit = [xy]
 distance = defaultdict(int)
 while visit:
