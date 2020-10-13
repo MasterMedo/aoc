@@ -1,13 +1,14 @@
 from math import gcd
 from re import findall
-from collections import defaultdict
 from itertools import combinations, count
+
 
 def lcm(x, y):
     return abs(x*y) // gcd(x, y)
 
+
 with open('../input/12.txt') as f:
-    moons = [[list(map(int, findall('-?\d+', line))), [0]*3] for line in f]
+    moons = [[list(map(int, findall(r'-?\d+', line))), [0]*3] for line in f]
 
 start = list(zip(*list(m for moon in moons for m in moon)))
 energy = [[[0]*3, [0]*3] for _ in moons]
