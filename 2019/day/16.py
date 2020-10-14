@@ -1,3 +1,5 @@
+from itertools import accumulate
+
 with open('../input/16.txt') as f:
     sequence_ = sequence = f.read()[:-1]
 
@@ -16,14 +18,9 @@ for phase in range(100):
 
 print(*sequence[:8], sep='')
 
-sequence = list(map(int, sequence_*10000))[offset:]
+sequence = list(map(int, sequence_*10000))[offset:][::-1]
 
 for _ in range(100):
-    sequence_ = [0]*len(sequence)
-    s = 0
-    for i, e in reversed(list(enumerate(sequence))):
-        s = (s + e) % 10
-        sequence_[i] = s
-    sequence = sequence_
+    sequence = list(accumulate(sequence, lambda x, y: (x + y) % 10))
 
-print(*sequence[:8], sep='')
+print(*sequence[::-1][:8], sep='')
