@@ -1,8 +1,8 @@
 import re
 
-with open("../input/5.txt") as f:
+with open('../input/5.txt') as f:
     data = f.readlines()
 
-print sum([1 for i in data if all(re.match(r, i) \
-    for r in (".*([aeiou].*){3}", "^((?!ab|cd|xy|pq).)*$", ".*(.)\\1"))])
-print sum([1 for i in data if re.match(".*((.)(.)).*\\1", i) and re.match(".*(.).\\1", i)])
+rules = r'([aeiou].*){3}', r'(.)\1', r'^((?!ab|cd|pq|xy).)*$'
+# rules = r'(..).*\1', r'(.).\1'
+print(sum(all(re.search(pattern, i) for pattern in rules) for i in data))
