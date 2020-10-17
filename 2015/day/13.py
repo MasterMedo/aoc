@@ -1,23 +1,21 @@
-def org(i):
-    i = i[:len(i) - 1].split()
-    return (i[0], i[-1]), int(i[3]) if i[2] == 'gain' else - int(i[3])
+from collections import defaultdict
 
-def solve(x, c, n):
-    if len(c) == 0:
-        return n + data[x, item]
-    s = 0
-    for y in c:
-        s = max(solve(y, c.difference({y}), n + data[x, y]), s)
-    return s
 
+def seat(name, names, n):
+    if not names:
+        return n + data[frozenset([name, starting_name])]
+
+    return max(seat(name_, names - {name_}, n + data[frozenset([name, name_])])
+               for name_ in names)
+
+
+data = defaultdict(int)
 with open('../input/13.txt') as f:
-    tmp = dict([org(i[:-1]) for i in f.readlines()])
-    data = {(i, j): tmp[i, j] + tmp[j, i] for i, j in tmp}
+    for name, _, gain, n, *_, name_ in map(str.split, f.readlines()):
+        data[frozenset([name, name_[:-1]])] += int(n) * (-1)**(gain != 'gain')
 
-p = {j for i in data for j in i}
-# data.update({j: 0 for i in p for j in [('me', i), (i, 'me')]})
-# p = p.union({'me'})
+names = {name for name_pair in data for name in name_pair}
+# names = names.union({'me'})
 
-item = p.pop()
-print solve(item, p, 0)
-
+starting_name = names.pop()
+print(seat(starting_name, names, 0))
