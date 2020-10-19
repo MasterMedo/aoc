@@ -5,12 +5,12 @@ with open('../input/23.txt') as f:
 
 x, y, z, r = max(nanobots, key=lambda x: x[-1])
 print(sum(abs(x-a) + abs(y-b) + abs(z-c) <= r
-      for x, y, z, _ in nanobots))
+      for a, b, c, _ in nanobots))
 
 from z3 import Int, If, Optimize
 
 def Abs(x):
-  return If(x >= 0,x,-x)
+  return If(x >= 0, x, -x)
 
 def Dist(x, y, z, a, b, c):
     return Abs(x-a) + Abs(y-b) + Abs(z-c)
