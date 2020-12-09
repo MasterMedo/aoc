@@ -1,23 +1,25 @@
 from collections import deque
-from itertools import combinations
 
 with open('../input/9.txt') as f:
     data = list(map(int, f))
 
-for i, x in enumerate(data[25:], 25):
-    if data[i] not in map(sum, combinations(data[i-25:i], 2)):
-        print(data[i])
+preamble = deque(data[:25])
+for target in data[25:]:
+    if all(target - i not in preamble for i in preamble):
+        print(target)
         break
 
-s = 0
+    preamble.popleft()
+    preamble.append(target)
+
+running_sum = 0
 contiguous_set = deque()
-for i, n in enumerate(data):
-    if s == x and len(contiguous_set) > 1:
+for n in data:
+    running_sum += n
+    contiguous_set.append(n)
+    while running_sum > target:
+        running_sum -= contiguous_set.popleft()
+
+    if running_sum == target and len(contiguous_set) > 1:
         print(min(contiguous_set) + max(contiguous_set))
         break
-
-    contiguous_set.append(n)
-    s += n
-    while s > x:
-        tmp = contiguous_set.popleft()
-        s -= tmp
