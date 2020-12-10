@@ -1,7 +1,7 @@
 with open('../input/10.txt') as f:
     data = list(sorted(int(line) for line in f))
 
-delta = [0]*4
+delta = [0, 0, 0, 1]
 joltage = 0
 for n in data:
     delta[n-joltage] += 1
@@ -9,8 +9,7 @@ for n in data:
 
 print(delta[1] * delta[3])
 
-stairs = [0]*(data[-1]+1)
-stairs[0] = 1
+stairs = [1] + [0]*data[-1]
 for n in data:
     stairs[n] = stairs[n-3] + stairs[n-2] + stairs[n-1]
 
