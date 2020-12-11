@@ -1,10 +1,10 @@
 with open('../input/10.txt') as f:
-    data = list(sorted(int(line) for line in f))
+    data = sorted(map(int, f))
 
-delta = [0, 0, 0, 1]
+delta = {1: 0, 3: 1}
 joltage = 0
 for n in data:
-    delta[n-joltage] += 1
+    delta[n - joltage] += 1
     joltage = n
 
 print(delta[1] * delta[3])
