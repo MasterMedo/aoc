@@ -30,14 +30,14 @@ for i, ticket in enumerate(tickets):
                 if a := all(n < lo or hi < n for lo, hi in rules[rule]):
                     columns[j] -= {rule}
 
-columns_ = []
-while columns_ != columns:
-    columns_ = [set(column) for column in columns]
+change = True
+while change:
+    change = False
     for i, column in enumerate(columns):
         if len(column) == 1:
             for j, column2 in enumerate(columns):
-                if i != j:
+                if i != j and column & column2:
                     columns[j] -= column
+                    change = True
 
-columns = [next(iter(column)) for column in columns]
-print(prod(n for c, n in zip(columns, my_ticket) if 'departure' in c))
+print(prod(n for c, n in zip(columns, my_ticket) if 'departure' in c.pop()))
