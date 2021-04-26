@@ -1,4 +1,4 @@
-import itertools as it  # noqa
+from itertools import count
 from copy import deepcopy
 
 
@@ -14,7 +14,7 @@ def neighbours1(r, c):
 def neighbours2(row, col):
     n = []
     for delta_r, delta_c in neighbours1(0, 0):
-        for k in it.count(1):
+        for k in count(1):
             r = row + k * delta_r
             c = col + k * delta_c
             if isvalid(r, c):
@@ -33,7 +33,7 @@ ROWS, COLUMNS = len(start), len(start[0])
 
 for neighbours, adjecent in [(neighbours1, 4), (neighbours2, 5)]:
     data = start
-    for episode in it.count():
+    for episode in count():
         data_ = deepcopy(data)
         for i, row in enumerate(data):
             for j, seat in enumerate(row):
