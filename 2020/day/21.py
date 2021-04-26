@@ -31,12 +31,9 @@ while visit:
                     visit.add(a)
 
 toxic = set.union(*food.values())
-s = 0
-for ingridients, a in data:
-    for ingridient in ingridients:
-        if ingridient not in toxic:
-            s += 1
-
-print(s)
 d = dict((v.pop(), k) for k, v in food.items())
+
+print(sum(ingridient not in toxic
+          for ingridients, a in data
+          for ingridient in ingridients))
 print(','.join(sorted(d.keys(), key=lambda k: d[k])))
