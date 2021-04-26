@@ -1,5 +1,5 @@
 with open('../input/25.txt') as f:
-    me, door = keys = set(map(int, f.read().splitlines()))
+    me, door = keys = set(map(int, f))
 
 mod = 20201227
 loop_size = 1
