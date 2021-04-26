@@ -18,7 +18,7 @@ with open('../input/24.txt') as f:
 print(sum(grid.values()))
 
 for i in range(100):
-    for tile in dict(grid):
+    for tile in grid.keys():
         for n in d.values():
             grid[tile+n]
 
