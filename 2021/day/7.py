@@ -4,5 +4,5 @@ with open("../input/7.txt") as f:
 median = data[len(data) // 2]
 print(sum(abs(n - median) for n in data))
 
-mean = sum(data) // len(data)
+mean = (sum(data) + 1) // len(data)
 print(sum(abs(n - mean) * (abs(n - mean) + 1) // 2 for n in data))
