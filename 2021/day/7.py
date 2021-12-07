@@ -1,11 +1,8 @@
-with open("../input/7.txt") as fp:
-    data = [int(n) for n in fp.read().split(",")]
+with open("../input/7.txt") as f:
+    data = list(sorted(int(n) for n in f.read().split(",")))
 
-part_1 = float("inf")
-part_2 = float("inf")
-for i in range(max(data)):
-    part_1 = min(part_1, sum(abs(i - n) for n in data))
-    part_2 = min(part_2, sum(abs(i - n) * (abs(i - n) + 1) // 2 for n in data))
+median = data[len(data) // 2]
+print(sum(abs(n - median) for n in data))
 
-print(part_1)
-print(part_2)
+mean = sum(data) // len(data)
+print(sum(abs(n - mean) * (abs(n - mean) + 1) // 2 for n in data))
