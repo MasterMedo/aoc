@@ -9,19 +9,19 @@ part_1 = 0
 part_2 = []
 for line in data:
     stack = []
-    for c in line[:-1]:
+    for c in line.strip():
         if c in ")]}>":
-            if stack[-1] != c:
+            if stack.pop() != c:
                 part_1 += corrupted_score[c]
                 break
-            stack.pop()
         else:
             stack.append(matching_parenthesis[c])
     else:
         score = 0
         for c in reversed(stack):
             score = score * 5 + incomplete_score[c]
+
         part_2.append(score)
 
 print(part_1)
-print(list(sorted(part_2))[len(part_2) // 2])
+print(sorted(part_2)[len(part_2) // 2])
