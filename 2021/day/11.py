@@ -8,6 +8,7 @@ with open("../input/11.txt") as f:
 
 height = y + 1
 width = x + 1
+border = ((1, -1), (1, 0), (1, 1), (0, -1), (0, 1), (-1, -1), (-1, 0), (-1, 1))
 flashes = 0
 for step in count(1):
     stack = []
@@ -20,19 +21,14 @@ for step in count(1):
 
     while stack:
         x, y = stack.pop()
-        for dx, dy in [
-            ( 1, -1), ( 1, 0), ( 1, 1),
-            ( 0, -1),          ( 0, 1),
-            (-1, -1), (-1, 0), (-1, 1),
-        ]:
+        for dx, dy in border:
             x_ = x + dx
             y_ = y + dy
             if 0 <= x_ < width and 0 <= y_ < height:
                 data[x_, y_] += 1
-                if (x_, y_) not in seen:
-                    if data[x_, y_] > 9:
-                        seen.add((x_, y_))
-                        stack.append((x_, y_))
+                if (x_, y_) not in seen and data[x_, y_] > 9:
+                    seen.add((x_, y_))
+                    stack.append((x_, y_))
 
     flashes += len(seen)
     for x, y in seen:
