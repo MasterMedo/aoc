@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 
-def bfs(start, seen, part_2=False):
+def dfs(start, seen, part_2=False):
     if start == "end":
         return 1
 
@@ -9,9 +9,9 @@ def bfs(start, seen, part_2=False):
     for end in d[start]:
         if end not in seen:
             tmp = {end} if end == end.lower() else set()
-            s += bfs(end, seen | tmp, part_2)
+            s += dfs(end, seen | tmp, part_2)
         elif part_2 and end != "start":
-            s += bfs(end, seen, False)
+            s += dfs(end, seen, False)
 
     return s
 
@@ -25,5 +25,5 @@ for line in data:
     d[start].add(end)
     d[end].add(start)
 
-print(bfs("start", {"start"}))
-print(bfs("start", {"start"}, True))
+print(dfs("start", {"start"}))
+print(dfs("start", {"start"}, True))
