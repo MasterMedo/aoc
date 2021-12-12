@@ -10,20 +10,20 @@ def bfs(start, seen, part_2=False):
         if end not in seen:
             tmp = {end} if end == end.lower() else set()
             s += bfs(end, seen | tmp, part_2)
-        elif part_2 is None and end != "start":
-            s += bfs(end, seen, end)
+        elif part_2 and end != "start":
+            s += bfs(end, seen, False)
 
     return s
 
 
-d = defaultdict(set)
 with open("../input/12.txt") as f:
     data = f.readlines()
 
+d = defaultdict(set)
 for line in data:
     start, end = line.strip().split("-")
     d[start].add(end)
     d[end].add(start)
 
 print(bfs("start", {"start"}))
-print(bfs("start", {"start"}, None))
+print(bfs("start", {"start"}, True))
