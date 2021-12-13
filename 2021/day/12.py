@@ -8,7 +8,7 @@ def dfs(start, seen, part_2=False):
     s = 0
     for end in d[start]:
         if end not in seen:
-            tmp = {end} if end == end.lower() else set()
+            tmp = {end} if end.islower() else set()
             s += dfs(end, seen | tmp, part_2)
         elif part_2 and end != "start":
             s += dfs(end, seen, False)
