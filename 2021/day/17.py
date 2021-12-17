@@ -1,10 +1,8 @@
 import re
-from math import sqrt, ceil
 
 with open("../input/17.txt") as f:
     xmin, xmax, ymin, ymax = map(int, re.findall(r"[-\d]+", f.read()))
 
-# assumes ymin, ymax are negative
 print(abs(ymin) * abs(ymin + 1) // 2)
 
 velocities = 0
