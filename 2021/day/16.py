@@ -4,7 +4,7 @@ from functools import reduce
 from collections import deque
 
 with open("../input/16.txt") as f:
-    data = deque(str(bin(int(f.read()[:-1], 16)))[2:])
+    data = deque("".join(bin(int(c, 16))[2:].zfill(4) for c in f.read()[:-1]))
 
 
 def parse():
