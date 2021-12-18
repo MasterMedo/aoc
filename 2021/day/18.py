@@ -19,6 +19,16 @@ class Node:
         node.right = Node.from_list(right, parent=node)
         return node
 
+    def __add__(self, other):
+        snail = Node(left=self, right=other)
+        snail.left.parent = snail
+        snail.right.parent = snail
+        snail.explode()
+        while snail.split():
+            snail.explode()
+
+        return snail
+
     def explode(self, depth=0):
         if self.left is None and self.right is None:
             return
@@ -99,13 +109,8 @@ with open("../input/18.txt") as f:
     snails = list(map(eval, f.read()[:-1].split("\n")))
 
 snail = Node.from_list(snails[0])
-for i in range(1, len(snails)):
-    snail = Node(left=snail, right=Node.from_list(snails[i]))
-    snail.left.parent = snail
-    snail.right.parent = snail
-    snail.explode()
-    while snail.split():
-        snail.explode()
+for other in snails[1:]:
+    snail += Node.from_list(other)
 
 print(snail.magnitude())
 
@@ -113,15 +118,7 @@ max_magnitude = 0
 for i in range(len(snails)):
     for j in range(len(snails)):
         if i != j:
-            snail = Node(
-                left=Node.from_list(snails[i]), right=Node.from_list(snails[j])
-            )
-            snail.left.parent = snail
-            snail.right.parent = snail
-            snail.explode()
-            while snail.split():
-                snail.explode()
-
+            snail = Node.from_list(snails[i]) + Node.from_list(snails[j])
             max_magnitude = max(max_magnitude, snail.magnitude())
 
 print(max_magnitude)
