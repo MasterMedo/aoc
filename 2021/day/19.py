@@ -29,10 +29,10 @@ with open("../input/19.txt") as f:
 
 scanner_positions = [(0, 0, 0)] * len(scanners)
 found = [-1] * len(scanners)
-done = len(found) - 1
 found[0] = 0
+scanners_found = 1
 for i in cycle(range(len(scanners))):
-    if done == 0:
+    if scanners_found == len(scanners):
         break
 
     if found[i] == -1:
@@ -43,17 +43,9 @@ for i in cycle(range(len(scanners))):
             continue
 
         for negate in negations:
-            if found[j] != -1:
-                break
-
             for rotate in rotations:
-                if found[j] != -1:
-                    break
-
                 scanner_j = set(starmap(negate, starmap(rotate, scanners[j])))
                 for x_1, y_1, z_1 in scanners[i]:
-                    if found[j] != -1:
-                        break
                     for x_2, y_2, z_2 in scanner_j:
                         if found[j] != -1:
                             break
@@ -67,7 +59,7 @@ for i in cycle(range(len(scanners))):
                             scanners[j] = moved
                             found[j] = found[i]
                             scanner_positions[j] = (dx, dy, dz)
-                            done -= 1
+                            scanners_found += 1
                             break
 
 print(len(set.union(*scanners)))
