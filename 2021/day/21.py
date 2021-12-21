@@ -21,16 +21,12 @@ def part_2(player_1, player_2, score_1, score_2):
         return (0, 1)
 
     wins = [0, 0]
-    for i in (1, 2, 3):
-        for j in (1, 2, 3):
-            for k in (1, 2, 3):
-                new_player_1 = (player_1 + i + j + k) % 10
-                new_score_1 = score_1 + new_player_1 + 1
-                win_2, win_1 = part_2(
-                    player_2, new_player_1, score_2, new_score_1
-                )
-                wins[0] += win_1
-                wins[1] += win_2
+    for die, throws in zip(range(3, 10), (1, 3, 6, 7, 6, 3, 1)):
+        new_player_1 = (player_1 + die) % 10
+        new_score_1 = score_1 + new_player_1 + 1
+        win_2, win_1 = part_2(player_2, new_player_1, score_2, new_score_1)
+        wins[0] += win_1 * throws
+        wins[1] += win_2 * throws
 
     return wins
 
