@@ -20,7 +20,6 @@ A cool [solution](https://github.com/MasterMedo/aoc/blob/master/2018/day/8.py) t
 **2019**, most fun year so far?
 Maybe because I solved all [intcode puzzles](https://adventofcode.com/2019/day/9) before starting the [mathy one](https://adventofcode.com/2019/day/22)s.
 
-If you're new to programming; **2020** is your jam. Back to the basics year with a bit of number theory.
+If you're new to programming; **2020** is your jam. Back to the basics year with a bit of number theory. Although I managed to crack the [global leaderboard](https://adventofcode.com/2020/leaderboard/day/22) on the 90th position, my median position was 1391.
 
-> disclaimer ---
-> There's a lot of switching back and forth between python 2 and 3.
+**2021** was fun and games up to day 17, and a tough nut to crack from then on out. I managed to get on the leaderboard on days [5](https://adventofcode.com/2021/leaderboard/day/5) and [22](https://adventofcode.com/2021/leaderboard/day/22). My median position was 600, on 15 puzzles I was sub 300th.
