@@ -1,12 +1,11 @@
 from more_itertools import grouper
-from string import ascii_lowercase
 
 
 def score(char: str) -> int:
-    if char in ascii_lowercase:
+    if char.islower():
         return ord(char) - ord("a") + 1
-    else:
-        return ord(char) - ord("A") + 1 + 26
+
+    return ord(char) - ord("A") + 1 + 26
 
 
 with open("../input/3.txt") as f:
