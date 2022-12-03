@@ -13,15 +13,13 @@ with open("../input/3.txt") as f:
 
 part1 = 0
 for line in lines:
-    left = line.strip()[: len(line) // 2]
-    right = line.strip()[len(line) // 2 :]
-    char = set(left).intersection(set(right)).pop()
-    part1 += score(char)
+    mid = len(line) // 2
+    char = set(line[:mid]) & set(line[mid:])
+    part1 += score(char.pop())
 
 part2 = 0
-for line1, line2, line3 in grouper(lines, 3):
-    char = set(line1).intersection(set(line2)).intersection(set(line3)).pop()
-    part2 += score(char)
+for group in grouper(lines, 3):
+    part2 += score(set.intersection(*map(set, group)).pop())
 
 print(part1)
 print(part2)
