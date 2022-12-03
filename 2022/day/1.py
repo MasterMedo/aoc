@@ -1,5 +1,5 @@
 with open("../input/1.txt") as f:
-    elfs = [sum(map(int, elf.split("\n"))) for elf in f.read().split("\n\n")[:-1]]
+    elfs = [sum(map(int, elf.split())) for elf in f.read().split("\n\n")]
 
 print(max(elfs))
-print(sum(list(sorted(elfs))[-3:]))
+print(sum(sorted(elfs, reverse=True)[:3]))
